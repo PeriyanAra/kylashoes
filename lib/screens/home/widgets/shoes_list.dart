@@ -11,17 +11,18 @@ class ShoesList extends StatefulWidget {
   ShoesListState createState() => ShoesListState();
 }
 
-class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
+class ShoesListState extends State<ShoesList>
+    with SingleTickerProviderStateMixin {
   PageController? pageController;
+  late Animation<double> leftPaddingAnimation;
+  late AnimationController leftPaddingAnimationController;
+  bool isLeftPaddingAnimationStarted = false;
 
   double viewportFraction = 0.67;
 
   double? pageOffset = 0;
   bool animationStarted = false;
   bool isForward = true;
-
-  late Animation<double> lastMomentumAnimation;
-  late AnimationController lastMomentumAnimationController;
 
   @override
   void initState() {
@@ -56,14 +57,10 @@ class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
   @override
   void dispose() {
     pageController!.dispose();
-    lastMomentumAnimationController.dispose();
+    leftPaddingAnimationController.dispose();
 
     super.dispose();
   }
-
-  late Animation<double> leftPaddingAnimation;
-  late AnimationController leftPaddingAnimationController;
-  bool isLeftPaddingAnimationStarted = false;
 
   void _setupLeftPaddingAnimation() {
     leftPaddingAnimationController = AnimationController(
@@ -87,8 +84,10 @@ class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
         physics: const ClampingScrollPhysics(),
         itemBuilder: (context, index) {
           final itemIndex = index % shoesViewModels.length;
-          double scale = max(viewportFraction,
-              (1 - (pageOffset! - index).abs()) + viewportFraction);
+          double scale = max(
+            viewportFraction,
+            (1 - (pageOffset! - index).abs()) + viewportFraction,
+          );
 
           double angle = (pageOffset! - index).abs();
 
