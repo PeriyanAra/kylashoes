@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kylashoes/screens/home/view_models/shoe_view_model.dart';
-import 'package:kylashoes/screens/home/widgets/simple_shadow.dart';
+import 'package:kylashoes/common/widgets/image_shadow.dart';
 
 class ShoeCard extends StatelessWidget {
   final ShoeViewModel shoeViewModel;
@@ -58,7 +58,7 @@ class ShoeCard extends StatelessWidget {
         Positioned(
           right: -20,
           top: 60,
-          child: SimpleShadow(
+          child: ImageShadow(
             offset: const Offset(14, 10),
             sigma: 20,
             opacity: 0.35,
