@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:kylashoes/screens/home/widgets/shoes_list.dart';
-import 'package:kylashoes/screens/home/widgets/tab_content.dart';
 import 'package:kylashoes/screens/home/widgets/shoes_tab_bar.dart';
 
 class ShoesTab extends StatefulWidget {
