@@ -22,7 +22,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(
-        microseconds: 800,
+        microseconds: 1500,
       ),
     );
 
@@ -66,7 +66,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
               children: [
                 AnimatedContainer(
                   curve: Curves.fastOutSlowIn,
-                  duration: const Duration(milliseconds: 600),
+                  duration: const Duration(milliseconds: 800),
                   height: _animation.value,
                   width: _animation.value,
                   decoration: BoxDecoration(
@@ -83,7 +83,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                       opacity: _animationStatus == AnimationStatus.forward
                           ? 1
                           : 0,
-                      duration: const Duration(milliseconds: 200),
+                      duration: const Duration(milliseconds: 300),
                       child: AnimatedContainer(
                         alignment: Alignment.center,
                         curve: _animationStatus == AnimationStatus.forward
@@ -92,7 +92,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                         height: _animationStatus == AnimationStatus.forward
                             ? _animation.value + 50
                             : _animation.value + 1,
-                        duration: const Duration(milliseconds: 500),
+                        duration: const Duration(milliseconds: 1000),
                         child: Image.asset(
                           'assets/images/sneaker_01.png',
                         ),
@@ -104,7 +104,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
             ),
             const SizedBox(width: 50),
             AnimatedOpacity(
-              duration: const Duration(milliseconds: 800),
+              duration: const Duration(milliseconds: 500),
               opacity: _animation.value / 100,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
