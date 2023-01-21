@@ -5,6 +5,7 @@ class ItemInfoViewModel {
     required this.price,
     required this.isFavorite,
   });
+
   String imagePath;
   String model;
   double price;

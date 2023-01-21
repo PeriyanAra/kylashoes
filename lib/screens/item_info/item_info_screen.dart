@@ -67,7 +67,7 @@ class _ItemInfoScreenState extends State<ItemInfoScreen> {
                   text: 'ADD TO BAG',
                   onTap: () {
                     context.read<ShoeBloc>().add(
-                          GetShoesItems(
+                          AddShoes(
                             shoeViewModel: widget.shoeViewModel,
                           ),
                         );
