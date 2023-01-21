@@ -70,7 +70,7 @@ class _NewShoesState extends State<NewShoes> {
               CustomButton(
                 onTap: () {},
                 child: const Icon(
-                  Icons.arrow_right_alt_outlined,
+                  Icons.arrow_right_alt_rounded,
                 ),
               ),
             ],
