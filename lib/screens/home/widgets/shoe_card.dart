@@ -62,7 +62,9 @@ class _ShoeCardState extends State<ShoeCard> {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const ItemInfoScreen(),
+            builder: (context) => ItemInfoScreen(
+              shoeViewModel: widget.shoeViewModel,
+            ),
           ),
         );
       },

@@ -6,7 +6,7 @@ part 'shoe_event.dart';
 part 'shoe_state.dart';
 
 class ShoeBloc extends Bloc<ShoeEvent, ShoeState> {
-  ShoeBloc() : super(ShoeInitial()) {
+  ShoeBloc() : super(ShoeInitialState()) {
     on<GetShoesItems>(_handleGetShoesItems);
     on<DeleteShoesItem>(_handleDeleteShoesItem);
   }
@@ -20,7 +20,7 @@ class ShoeBloc extends Bloc<ShoeEvent, ShoeState> {
       event.shoeViewModel,
     );
     emit(
-      ShoeLoaded(
+      ShoeLoadedState(
         shoeViewModels: shoeViewModels,
       ),
     );
@@ -34,7 +34,10 @@ class ShoeBloc extends Bloc<ShoeEvent, ShoeState> {
       (element) => element.id == event.id,
     );
     emit(
-      ShoeLoaded(shoeViewModels: shoeViewModels),
+      ShoeLoadedState(
+        shoeViewModels: shoeViewModels
+         
+      ),
     );
   }
 }

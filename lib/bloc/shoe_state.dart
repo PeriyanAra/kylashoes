@@ -3,12 +3,12 @@ part of 'shoe_bloc.dart';
 @immutable
 abstract class ShoeState {}
 
-class ShoeInitial extends ShoeState {}
+class ShoeInitialState extends ShoeState {}
 
-class ShoeLoading extends ShoeState {}
+class ShoeLoadingState extends ShoeState {}
 
-class ShoeLoaded extends ShoeState {
+class ShoeLoadedState extends ShoeState {
   final List<ShoeViewModel> shoeViewModels;
 
- ShoeLoaded({required this.shoeViewModels});
+ ShoeLoadedState({required this.shoeViewModels});
 }
