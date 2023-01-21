@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kylashoes/screens/home/view_models/shoe_view_model.dart';
 import 'package:kylashoes/common/widgets/image_shadow.dart';
 import 'package:kylashoes/screens/home/widgets/shoe_card_main_info.dart';
+import 'package:kylashoes/view_models/shoe_view_model.dart';
 
 class ShoeCard extends StatelessWidget {
   final ShoeViewModel shoeViewModel;

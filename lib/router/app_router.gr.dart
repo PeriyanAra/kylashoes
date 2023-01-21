@@ -68,7 +68,7 @@ class _$AppRouter extends RootStackRouter {
     StoreRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const StoreScreen(),
+        child: const BagScreen(),
       );
     },
     ProfileRoute.name: (routeData) {
@@ -251,7 +251,7 @@ class FavoriteRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [StoreScreen]
+/// [BagScreen]
 class StoreRoute extends PageRouteInfo<void> {
   const StoreRoute()
       : super(
