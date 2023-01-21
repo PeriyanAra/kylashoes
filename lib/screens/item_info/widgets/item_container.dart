@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kylashoes/common/widgets/image_shadow.dart';
 
 class ItemContainer extends StatelessWidget {
   const ItemContainer({
@@ -14,60 +15,52 @@ class ItemContainer extends StatelessWidget {
       alignment: AlignmentDirectional.center,
       children: [
         Positioned(
-          child: Container(
-            width: 1000,
-            height: 300,
-            decoration: const BoxDecoration(
+          child: ClipPath(
+            clipper: CustumPath(),
+            child: Container(
+              width: 1000,
+              height: 350,
               color: Color.fromRGBO(223, 162, 144, 1),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(1500),
-                // bottomRight: Radius.circular(10),
-              ),
+              // decoration: const BoxDecoration(
+
+              //   borderRadius: BorderRadius.only(
+              //     bottomLeft: Radius.circular(1500),
+              //   ),
+              // ),
             ),
           ),
         ),
         Positioned(
           top: 0,
-          child: Image.asset(
-            imageUrl,
-            height: 350,
+          child: ImageShadow(
+            offset: const Offset(14, 10),
+            sigma: 20,
+            opacity: 0.35,
+            child: Image.asset(
+              imageUrl,
+              width: 350,
+              height: 350,
+            ),
           ),
         ),
       ],
     );
+  }
+}
 
-    //    Stack(
-    //     alignment: AlignmentDirectional.center,
-    //     children: [
-    //       // Positioned(
-    //       //   child: Container(
-    //       //     height: 350,
-    //       //     decoration: const BoxDecoration(
-    //       //       color: Color.fromRGBO(223, 162, 144, 1),
-    //       //       borderRadius: BorderRadius.only(
-    //       //         bottomRight: Radius.circular(0),
-    //       //         bottomLeft: Radius.circular(200),
-    //       //       ),
-    //       //     ),
-    //       //   ),
-    //       // ),
+class CustumPath extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.lineTo(0, size.height);
+    path.lineTo(size.width, size.height);
+    path.lineTo(size.width, 0);
+    path.lineTo(size.width, 0);
+    return path;
+  }
 
-    //       Positioned(
-    //         left: 50,
-    //         bottom: 20,
-    //         child: Container(
-    //           // width: 1000,
-    //           // height: MediaQuery.of(context).size.height / 2.2,
-    //           decoration: BoxDecoration(
-    //             color: Colors.red,
-    //             borderRadius: BorderRadius.only(
-    //               bottomLeft: Radius.circular(1500),
-    //               bottomRight: Radius.circular(100),
-    //             ),
-    //           ),
-    //         ),
-    //       ),
-    //     ],
-    //   );
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    return true;
   }
 }

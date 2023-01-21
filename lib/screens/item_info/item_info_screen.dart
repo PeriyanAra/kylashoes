@@ -15,14 +15,16 @@ class ItemInfoScreen extends StatelessWidget {
           itemName: 'Nike',
         ),
       ),
-      body: ListView(
-        children: const [
-          ItemContainer(imageUrl: 'assets/images/sneaker_01.png'),
-          SizedBox(height: 30),
-          ItemPhotoHorizontalList(
-            imageUrl: ['assets/images/sneaker_01.png'],
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            ItemContainer(imageUrl: 'assets/images/sneaker_01.png'),
+            SizedBox(height: 30),
+            ItemPhotoHorizontalList(
+              imageUrl: ['assets/images/sneaker_01.png'],
+            ),
+          ],
+        ),
       ),
     );
   }
