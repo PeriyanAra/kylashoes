@@ -10,11 +10,12 @@ class ShoeViewModel {
     required this.producer,
     required this.backgroundColor,
   });
+
   final int id;
-   String imagePath;
-   String model;
-   double price;
-   bool isFavorite;
-   String producer;
-   Color backgroundColor;
+  String imagePath;
+  String model;
+  double price;
+  bool isFavorite;
+  String producer;
+  Color backgroundColor;
 }

@@ -3,11 +3,12 @@ part of 'shoe_bloc.dart';
 @immutable
 abstract class ShoeEvent {}
 
-class GetShoesItems extends ShoeEvent {
+class AddShoes extends ShoeEvent {
   final ShoeViewModel shoeViewModel;
 
-  GetShoesItems({required this.shoeViewModel});
+  AddShoes({required this.shoeViewModel});
 }
+
 class DeleteShoesItem extends ShoeEvent {
   final int id;
 
