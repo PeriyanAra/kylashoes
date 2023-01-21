@@ -30,15 +30,11 @@ class ShoeBloc extends Bloc<ShoeEvent, ShoeState> {
     DeleteShoesItem event,
     Emitter<ShoeState> emit,
   ) async {
-    shoeViewModels
-      .removeWhere(
-        (element) => element.id == event.id,
-      );
+    shoeViewModels.removeWhere(
+      (element) => element.id == event.id,
+    );
     emit(
-      ShoeLoaded(
-        shoeViewModels: shoeViewModels
-         
-      ),
+      ShoeLoaded(shoeViewModels: shoeViewModels),
     );
   }
 }

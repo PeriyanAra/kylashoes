@@ -18,6 +18,7 @@ class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
 
   double? pageOffset = 0;
   bool animationStarted = false;
+  bool isForward = true;
 
   late Animation<double> lastMomentumAnimation;
   late AnimationController lastMomentumAnimationController;
@@ -37,6 +38,12 @@ class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
     )..addListener(
         () {
           setState(() {
+            if (pageOffset! < pageController!.page!) {
+              isForward = true;
+            } else {
+              isForward = false;
+            }
+
             if (pageOffset!.floor() < pageController!.page!.floor()) {
               isLeftPaddingAnimationStarted = false;
             }
@@ -65,7 +72,7 @@ class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
     );
 
     leftPaddingAnimation = Tween<double>(
-      begin: 20,
+      begin: 21,
       end: 100,
     ).animate(leftPaddingAnimationController);
   }
@@ -99,8 +106,12 @@ class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
           return ShoeCard(
             shoeViewModel: shoesViewModels[itemIndex],
             animation: leftPaddingAnimation,
-            isPrevious: index == pageOffset!.floor() - 1,
+            isPrevious: isForward
+                ? index == pageOffset!.floor() - 1
+                : index == pageOffset!.ceil() - 1,
             isCurrent: index == pageOffset?.floor(),
+            isAbsoluteCurrent: index == pageOffset,
+            isForward: isForward,
             angle: angle,
             scale: scale,
           );
@@ -112,7 +123,7 @@ class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
 
 final shoesViewModels = [
   ShoeViewModel(
-    id:0,
+    id: 0,
     imagePath: 'assets/images/sneaker_01.png',
     model: 'Air-max',
     price: 130,
@@ -121,7 +132,7 @@ final shoesViewModels = [
     backgroundColor: const Color.fromRGBO(115, 202, 220, 1),
   ),
   ShoeViewModel(
-    id:1,
+    id: 1,
     imagePath: 'assets/images/sneaker_02.png',
     model: 'Air-270',
     price: 130,
@@ -130,7 +141,7 @@ final shoesViewModels = [
     backgroundColor: const Color.fromRGBO(173, 163, 231, 1),
   ),
   ShoeViewModel(
-    id:2,
+    id: 2,
     imagePath: 'assets/images/sneaker_03.png',
     model: 'Epic-react',
     price: 130,
@@ -139,7 +150,7 @@ final shoesViewModels = [
     backgroundColor: const Color.fromRGBO(37, 114, 168, 1),
   ),
   ShoeViewModel(
-    id:3,
+    id: 3,
     imagePath: 'assets/images/sneaker_04.png',
     model: 'Hustle',
     price: 130,
