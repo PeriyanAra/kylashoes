@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kylashoes/common/widgets/image_shadow.dart';
 
 class ItemContainer extends StatelessWidget {
   const ItemContainer({
@@ -11,6 +12,7 @@ class ItemContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      clipBehavior: Clip.none,
       alignment: AlignmentDirectional.center,
       children: [
         Positioned(
@@ -28,9 +30,17 @@ class ItemContainer extends StatelessWidget {
         ),
         Positioned(
           top: 0,
-          child: Image.asset(
-            imageUrl,
-            height: 350,
+          child: ImageShadow(
+            offset: const Offset(14, 10),
+            sigma: 20,
+            opacity: 0.3,
+            child: Hero(
+              tag: imageUrl,
+              child: Image.asset(
+                imageUrl,
+                height: 350,
+              ),
+            ),
           ),
         ),
       ],

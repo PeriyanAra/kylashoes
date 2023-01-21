@@ -23,7 +23,7 @@ class _ItemInfoScreenState extends State<ItemInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  PreferredSize(
+      appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
         child: ItemInfoScreenAppBar(
           itemName: widget.shoeViewModel.producer,
@@ -31,17 +31,20 @@ class _ItemInfoScreenState extends State<ItemInfoScreen> {
       ),
       body: ListView(
         children: [
-           ItemContainer(imageUrl:widget.shoeViewModel.imagePath),
+          ItemContainer(imageUrl: widget.shoeViewModel.imagePath),
           const SizedBox(height: 30),
-           ItemPhotoHorizontalList(
+          ItemPhotoHorizontalList(
             imageUrl: [widget.shoeViewModel.imagePath],
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              children:  [
-                BootsNameAndPrice(price: widget.shoeViewModel.price, model: widget.shoeViewModel.model,),
+              children: [
+                BootsNameAndPrice(
+                  price: widget.shoeViewModel.price,
+                  model: widget.shoeViewModel.model,
+                ),
                 const BootsDescriptionText(),
                 const BootsSizeCountry(),
                 const SizedBox(

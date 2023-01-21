@@ -11,16 +11,18 @@ class ShoesList extends StatefulWidget {
   ShoesListState createState() => ShoesListState();
 }
 
-class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
+class ShoesListState extends State<ShoesList>
+    with SingleTickerProviderStateMixin {
   PageController? pageController;
+  late Animation<double> leftPaddingAnimation;
+  late AnimationController leftPaddingAnimationController;
+  bool isLeftPaddingAnimationStarted = false;
 
   double viewportFraction = 0.67;
 
   double? pageOffset = 0;
   bool animationStarted = false;
-
-  late Animation<double> lastMomentumAnimation;
-  late AnimationController lastMomentumAnimationController;
+  bool isForward = true;
 
   @override
   void initState() {
@@ -37,6 +39,12 @@ class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
     )..addListener(
         () {
           setState(() {
+            if (pageOffset! < pageController!.page!) {
+              isForward = true;
+            } else {
+              isForward = false;
+            }
+
             if (pageOffset!.floor() < pageController!.page!.floor()) {
               isLeftPaddingAnimationStarted = false;
             }
@@ -49,14 +57,10 @@ class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
   @override
   void dispose() {
     pageController!.dispose();
-    lastMomentumAnimationController.dispose();
+    leftPaddingAnimationController.dispose();
 
     super.dispose();
   }
-
-  late Animation<double> leftPaddingAnimation;
-  late AnimationController leftPaddingAnimationController;
-  bool isLeftPaddingAnimationStarted = false;
 
   void _setupLeftPaddingAnimation() {
     leftPaddingAnimationController = AnimationController(
@@ -65,7 +69,7 @@ class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
     );
 
     leftPaddingAnimation = Tween<double>(
-      begin: 20,
+      begin: 21,
       end: 100,
     ).animate(leftPaddingAnimationController);
   }
@@ -80,8 +84,10 @@ class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
         physics: const ClampingScrollPhysics(),
         itemBuilder: (context, index) {
           final itemIndex = index % shoesViewModels.length;
-          double scale = max(viewportFraction,
-              (1 - (pageOffset! - index).abs()) + viewportFraction);
+          double scale = max(
+            viewportFraction,
+            (1 - (pageOffset! - index).abs()) + viewportFraction,
+          );
 
           double angle = (pageOffset! - index).abs();
 
@@ -99,8 +105,12 @@ class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
           return ShoeCard(
             shoeViewModel: shoesViewModels[itemIndex],
             animation: leftPaddingAnimation,
-            isPrevious: index == pageOffset!.floor() - 1,
+            isPrevious: isForward
+                ? index == pageOffset!.floor() - 1
+                : index == pageOffset!.ceil() - 1,
             isCurrent: index == pageOffset?.floor(),
+            isAbsoluteCurrent: index == pageOffset,
+            isForward: isForward,
             angle: angle,
             scale: scale,
           );
@@ -112,7 +122,7 @@ class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
 
 final shoesViewModels = [
   ShoeViewModel(
-    id:0,
+    id: 0,
     imagePath: 'assets/images/sneaker_01.png',
     model: 'Air-max',
     price: 130,
@@ -121,7 +131,7 @@ final shoesViewModels = [
     backgroundColor: const Color.fromRGBO(115, 202, 220, 1),
   ),
   ShoeViewModel(
-    id:1,
+    id: 1,
     imagePath: 'assets/images/sneaker_02.png',
     model: 'Air-270',
     price: 130,
@@ -130,7 +140,7 @@ final shoesViewModels = [
     backgroundColor: const Color.fromRGBO(173, 163, 231, 1),
   ),
   ShoeViewModel(
-    id:2,
+    id: 2,
     imagePath: 'assets/images/sneaker_03.png',
     model: 'Epic-react',
     price: 130,
@@ -139,7 +149,7 @@ final shoesViewModels = [
     backgroundColor: const Color.fromRGBO(37, 114, 168, 1),
   ),
   ShoeViewModel(
-    id:3,
+    id: 3,
     imagePath: 'assets/images/sneaker_04.png',
     model: 'Hustle',
     price: 130,
