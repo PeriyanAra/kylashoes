@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class CustomAnimatedButton extends StatefulWidget {
@@ -22,7 +24,6 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: InkWell(
-        onTap: widget.onTap,
         borderRadius: const BorderRadius.all(
           Radius.circular(8.0),
         ),
@@ -35,13 +36,14 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton> {
           setState(() {
             isPressed = !isPressed;
           });
+          widget.onTap();
         },
         child: AnimatedContainer(
           width: isPressed
-              ? MediaQuery.of(context).size.width * .7
-              : MediaQuery.of(context).size.width * .8,
+              ? MediaQuery.of(context).size.width * 0.7
+              : MediaQuery.of(context).size.width * 0.8,
           height: isPressed ? 45 : 50,
-          duration: const Duration(milliseconds: 80),
+          duration: const Duration(seconds: 3),
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(
@@ -53,7 +55,7 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton> {
           ),
           child: Text(
             widget.text,
-            style: TextStyle(color: Colors.grey[400]),
+            style: const TextStyle(color: Colors.white),
             textAlign: TextAlign.center,
           ),
         ),

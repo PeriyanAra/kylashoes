@@ -13,37 +13,36 @@ class BagScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ShoeBloc, ShoeState>(
       builder: (context, state) {
-        if (state is ShoeInitialState) {
-          return const Center(child: Text('There is not added items'));
-        }
-        if (state is ShoeLoadedState) {
-          return Scaffold(
-            appBar: const PreferredSize(
-              preferredSize: Size.fromHeight(kToolbarHeight + 30),
-              child: BagAppBar(),
-            ),
-            body: Padding(
-                padding: const EdgeInsets.only(
-                  top: 25,
+        return Scaffold(
+          appBar: const PreferredSize(
+            preferredSize: Size.fromHeight(kToolbarHeight + 30),
+            child: BagAppBar(),
+          ),
+          body: state.shoeViewModels.isEmpty
+              ? const Center(
+                  child: Text('No items in bag'),
+                )
+              : Padding(
+                  padding: const EdgeInsets.only(
+                    top: 25,
+                  ),
+                  child: ListView.builder(
+                    itemCount: state.shoeViewModels.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 40,
+                        ),
+                        child: BagShoesComponent(
+                          imageUrl: state.shoeViewModels[index].imagePath,
+                          price: state.shoeViewModels[index].price,
+                        ),
+                      );
+                    },
+                  ),
                 ),
-                child: ListView.builder(
-                  itemCount: state.shoeViewModels.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 40,
-                      ),
-                      child: BagShoesComponent(
-                        imageUrl: state.shoeViewModels[index].imagePath,
-                        price: state.shoeViewModels[index].price,
-                      ),
-                    );
-                  },
-                )),
-          );
-        }
-        return Container();
+        );
       },
     );
   }

@@ -6,22 +6,28 @@ part 'shoe_event.dart';
 part 'shoe_state.dart';
 
 class ShoeBloc extends Bloc<ShoeEvent, ShoeState> {
-  ShoeBloc() : super(ShoeInitialState()) {
+  ShoeBloc()
+      : super(
+          ShoeState(
+            shoeViewModels: [],
+          ),
+        ) {
     on<AddShoes>(_handleAddShoes);
     on<DeleteShoesItem>(_handleDeleteShoesItem);
   }
-  final shoeViewModels = <ShoeViewModel>[];
 
   Future _handleAddShoes(
     AddShoes event,
     Emitter<ShoeState> emit,
   ) async {
-    shoeViewModels.add(
+    List<ShoeViewModel> newShoeViewModels = [...state.shoeViewModels];
+
+    newShoeViewModels.add(
       event.shoeViewModel,
     );
     emit(
-      ShoeLoadedState(
-        shoeViewModels: shoeViewModels,
+      ShoeState(
+        shoeViewModels: newShoeViewModels,
       ),
     );
   }
@@ -30,11 +36,13 @@ class ShoeBloc extends Bloc<ShoeEvent, ShoeState> {
     DeleteShoesItem event,
     Emitter<ShoeState> emit,
   ) async {
-    shoeViewModels.removeWhere(
+    List<ShoeViewModel> newShoeViewModels = [...state.shoeViewModels];
+
+    newShoeViewModels.removeWhere(
       (element) => element.id == event.id,
     );
     emit(
-      ShoeLoadedState(shoeViewModels: shoeViewModels),
+      ShoeState(shoeViewModels: newShoeViewModels),
     );
   }
 }
