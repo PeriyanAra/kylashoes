@@ -14,7 +14,7 @@ class ShoesList extends StatefulWidget {
 class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
   PageController? pageController;
 
-  double viewportFraction = 0.6;
+  double viewportFraction = 0.67;
 
   double? pageOffset = 0;
   bool animationStarted = false;
@@ -65,7 +65,7 @@ class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
     );
 
     leftPaddingAnimation = Tween<double>(
-      begin: 10,
+      begin: 20,
       end: 100,
     ).animate(leftPaddingAnimationController);
   }
@@ -97,17 +97,12 @@ class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
           }
 
           return ShoeCard(
-            animation: leftPaddingAnimation,
             shoeViewModel: shoesViewModels[itemIndex],
-            angle: index == pageOffset?.floor() ? -angle : angle,
-            padding: EdgeInsets.only(
-              right: index == pageOffset!.floor() - 1
-                  ? leftPaddingAnimation.value
-                  : 10 + (100 * angle).abs(),
-              left: 20 + (100 * angle).abs(),
-              top: 100 - scale * 25,
-              bottom: 100 - scale * 25,
-            ),
+            animation: leftPaddingAnimation,
+            isPrevious: index == pageOffset!.floor() - 1,
+            isCurrent: index == pageOffset?.floor(),
+            angle: angle,
+            scale: scale,
           );
         },
       ),
@@ -150,6 +145,6 @@ final shoesViewModels = [
     price: 130,
     isFavorite: false,
     producer: 'nike',
-    backgroundColor: const Color.fromARGB(255, 73, 109, 225),
+    backgroundColor: const Color.fromRGBO(238, 98, 147, 1),
   ),
 ];
