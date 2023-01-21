@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:kylashoes/screens/home/view_models/shoe_view_model.dart';
+import 'package:kylashoes/router/app_router.dart';
+import 'package:kylashoes/view_models/shoe_view_model.dart';
 
 class ShoeCard extends StatelessWidget {
   final ShoeViewModel shoeViewModel;
@@ -46,8 +48,13 @@ class ShoeCard extends StatelessWidget {
         ),
         Positioned.fill(
           left: 50,
-          child: Image.asset(
-            shoeViewModel.imagePath,
+          child: GestureDetector(
+            onTap: () {
+              context.router.push(const ItemInfoRoute());
+            },
+            child: Image.asset(
+              shoeViewModel.imagePath,
+            ),
           ),
         ),
       ],

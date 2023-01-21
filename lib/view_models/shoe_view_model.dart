@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ShoeViewModel {
   ShoeViewModel({
+    required this.id,
     required this.imagePath,
     required this.model,
     required this.price,
@@ -9,11 +10,11 @@ class ShoeViewModel {
     required this.producer,
     required this.backgroundColor,
   });
-
-  String imagePath;
-  String model;
-  double price;
-  bool isFavorite;
-  String producer;
-  Color backgroundColor;
+  final int id;
+  final String imagePath;
+  final String model;
+  final double price;
+  final bool isFavorite;
+  final String producer;
+  final Color backgroundColor;
 }
