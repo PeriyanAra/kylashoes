@@ -26,11 +26,33 @@ class _ItemInfoScreenState extends State<ItemInfoScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: const [
-            ItemContainer(imageUrl: 'assets/images/sneaker_01.png'),
-            SizedBox(height: 30),
-            ItemPhotoHorizontalList(
+          children: [
+            const ItemContainer(imageUrl: 'assets/images/sneaker_01.png'),
+            const SizedBox(height: 30),
+            const ItemPhotoHorizontalList(
               imageUrl: ['assets/images/sneaker_01.png'],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 15.0),
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromARGB(171, 206, 202, 202),
+                        width: 1,
+                      ),
+                    ),
+                  ),
+                  const BootsNameAndPrice(),
+                  const BootsDescriptionText(),
+                  const BootsSizeCountry(),
+                  const SizedBox(height: 12.0),
+                  const BootsSizeListView(),
+                ],
+              ),
             ),
           ],
         ),

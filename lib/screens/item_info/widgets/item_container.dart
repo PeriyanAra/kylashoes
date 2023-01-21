@@ -15,18 +15,14 @@ class ItemContainer extends StatelessWidget {
       alignment: AlignmentDirectional.center,
       children: [
         Positioned(
-          child: ClipPath(
-            clipper: CustumPath(),
-            child: Container(
-              width: 1000,
-              height: 350,
+          child: Container(
+            width: 1000,
+            height: 350,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(1500),
+              ),
               color: Color.fromRGBO(223, 162, 144, 1),
-              // decoration: const BoxDecoration(
-
-              //   borderRadius: BorderRadius.only(
-              //     bottomLeft: Radius.circular(1500),
-              //   ),
-              // ),
             ),
           ),
         ),
