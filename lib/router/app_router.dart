@@ -6,7 +6,7 @@ import 'package:kylashoes/screens/favorite/favorite_screen.dart';
 import 'package:kylashoes/screens/home/home_screen.dart';
 import 'package:kylashoes/screens/item_info/item_info_screen.dart';
 import 'package:kylashoes/screens/profile/profile_screen.dart';
-import 'package:kylashoes/screens/store/store_screen.dart';
+import 'package:kylashoes/screens/bag/bag_screen.dart';
 
 part 'app_router.gr.dart';
 
@@ -51,7 +51,7 @@ part 'app_router.gr.dart';
           children: [
             AutoRoute(
               path: '',
-              page: StoreScreen,
+              page: BagScreen,
             ),
           ],
         ),
