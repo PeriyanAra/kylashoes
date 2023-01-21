@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:kylashoes/router/app_router_screen.dart';
 import 'package:kylashoes/screens/favorite/favorite_screen.dart';
 import 'package:kylashoes/screens/home/home_screen.dart';
+import 'package:kylashoes/screens/item_info/item_info_screen.dart';
 import 'package:kylashoes/screens/profile/profile_screen.dart';
 import 'package:kylashoes/screens/store/store_screen.dart';
 
@@ -25,6 +26,10 @@ part 'app_router.gr.dart';
             AutoRoute(
               path: '',
               page: HomeScreen,
+            ),
+              AutoRoute(
+              path: '',
+              page: ItemInfoScreen,
             ),
           ],
         ),
