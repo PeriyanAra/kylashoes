@@ -62,7 +62,7 @@ class _AppState extends State<App> {
           body: const <Widget>[
             HomeScreen(),
             FavoriteScreen(),
-            BagScreen(shoeViewModel: [],),
+            BagScreen(),
             ProfileScreen(),
           ][currentPageIndex],
         ),

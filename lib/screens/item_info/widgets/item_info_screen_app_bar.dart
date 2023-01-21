@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kylashoes/bloc/shoe_bloc.dart';
 import 'package:kylashoes/common/widgets/custom_button.dart';
 
 class ItemInfoScreenAppBar extends StatelessWidget {
@@ -36,9 +34,7 @@ class ItemInfoScreenAppBar extends StatelessWidget {
               ),
             ),
             CustomButton(
-              onTap: () {
-                context.read<ShoeBloc>().add(AddToBagEvent(viewModel: [], id: 0));
-              },
+              onTap: () { },
               child: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
