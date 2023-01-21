@@ -117,7 +117,7 @@ final shoesViewModels = [
     model: 'Air-max',
     price: 130,
     isFavorite: false,
-    producer: 'nike',
+    producer: 'Nike',
     backgroundColor: const Color.fromRGBO(115, 202, 220, 1),
   ),
   ShoeViewModel(
@@ -126,7 +126,7 @@ final shoesViewModels = [
     model: 'Air-270',
     price: 130,
     isFavorite: false,
-    producer: 'nike',
+    producer: 'Nike',
     backgroundColor: const Color.fromRGBO(173, 163, 231, 1),
   ),
   ShoeViewModel(
@@ -135,7 +135,7 @@ final shoesViewModels = [
     model: 'Epic-react',
     price: 130,
     isFavorite: false,
-    producer: 'nike',
+    producer: 'Nike',
     backgroundColor: const Color.fromRGBO(37, 114, 168, 1),
   ),
   ShoeViewModel(
@@ -144,7 +144,7 @@ final shoesViewModels = [
     model: 'Hustle',
     price: 130,
     isFavorite: false,
-    producer: 'nike',
+    producer: 'Nike',
     backgroundColor: const Color.fromRGBO(238, 98, 147, 1),
   ),
 ];

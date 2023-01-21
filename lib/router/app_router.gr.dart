@@ -54,9 +54,13 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     ItemInfoRoute.name: (routeData) {
+      final args = routeData.argsAs<ItemInfoRouteArgs>();
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const ItemInfoScreen(),
+        child: ItemInfoScreen(
+          key: args.key,
+          shoeViewModel: args.shoeViewModel,
+        ),
       );
     },
     FavoriteRoute.name: (routeData) {
@@ -65,7 +69,7 @@ class _$AppRouter extends RootStackRouter {
         child: const FavoriteScreen(),
       );
     },
-    StoreRoute.name: (routeData) {
+    BagRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
         child: const BagScreen(),
@@ -126,7 +130,7 @@ class _$AppRouter extends RootStackRouter {
               parent: AppRouterRoute.name,
               children: [
                 RouteConfig(
-                  StoreRoute.name,
+                  BagRoute.name,
                   path: '',
                   parent: StoreTabRouter.name,
                 )
@@ -228,14 +232,36 @@ class HomeRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ItemInfoScreen]
-class ItemInfoRoute extends PageRouteInfo<void> {
-  const ItemInfoRoute()
-      : super(
+class ItemInfoRoute extends PageRouteInfo<ItemInfoRouteArgs> {
+  ItemInfoRoute({
+    Key? key,
+    required ShoeViewModel shoeViewModel,
+  }) : super(
           ItemInfoRoute.name,
           path: '',
+          args: ItemInfoRouteArgs(
+            key: key,
+            shoeViewModel: shoeViewModel,
+          ),
         );
 
   static const String name = 'ItemInfoRoute';
+}
+
+class ItemInfoRouteArgs {
+  const ItemInfoRouteArgs({
+    this.key,
+    required this.shoeViewModel,
+  });
+
+  final Key? key;
+
+  final ShoeViewModel shoeViewModel;
+
+  @override
+  String toString() {
+    return 'ItemInfoRouteArgs{key: $key, shoeViewModel: $shoeViewModel}';
+  }
 }
 
 /// generated route for
@@ -252,14 +278,14 @@ class FavoriteRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [BagScreen]
-class StoreRoute extends PageRouteInfo<void> {
-  const StoreRoute()
+class BagRoute extends PageRouteInfo<void> {
+  const BagRoute()
       : super(
-          StoreRoute.name,
+          BagRoute.name,
           path: '',
         );
 
-  static const String name = 'StoreRoute';
+  static const String name = 'BagRoute';
 }
 
 /// generated route for
