@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:kylashoes/common/widgets/custom_button.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_shoes_quantity.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_shoes_value.dart';
 
@@ -84,16 +83,16 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                       opacity: _animationStatus == AnimationStatus.forward
                           ? 1
                           : 0,
-                      duration: const Duration(milliseconds: 1500),
+                      duration: const Duration(milliseconds: 200),
                       child: AnimatedContainer(
                         alignment: Alignment.center,
                         curve: _animationStatus == AnimationStatus.forward
                             ? Curves.elasticOut
-                            : Curves.elasticIn,
+                            : Curves.linear,
                         height: _animationStatus == AnimationStatus.forward
                             ? _animation.value + 50
                             : _animation.value + 1,
-                        duration: const Duration(milliseconds: 600),
+                        duration: const Duration(milliseconds: 500),
                         child: Image.asset(
                           'assets/images/sneaker_01.png',
                         ),

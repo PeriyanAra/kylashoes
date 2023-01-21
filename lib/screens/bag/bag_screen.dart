@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kylashoes/common/widgets/custom_button.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_app_bar.dart';
+import 'package:kylashoes/screens/bag/widgets/bag_bottom_status_bar.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_shoes_component.dart';
 
 class BagScreen extends StatelessWidget {
@@ -35,55 +35,7 @@ class BagScreen extends StatelessWidget {
                   },
                 ),
               ),
-              Container(
-                padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).padding.bottom,
-                ),
-                height: 190,
-                width: MediaQuery.of(context).size.width,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  width: MediaQuery.of(context).size.width - 40,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: const [
-                          Text(
-                            'TOTAL',
-                            style: TextStyle(fontWeight: FontWeight.w600),
-                          ),
-                          Text(
-                            '\$510.40',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      CustomButton(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.pink,
-                        ),
-                        height: 40,
-                        width: MediaQuery.of(context).size.width - 60,
-                        onTap: () {},
-                        child: const Text(
-                          'Next',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+             const BagBottomStatusBar()
             ],
           ),
         ),
