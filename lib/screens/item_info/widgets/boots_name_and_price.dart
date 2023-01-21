@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class BootsNameAndPrice extends StatelessWidget {
-  const BootsNameAndPrice({Key? key}) : super(key: key);
+  final double price;
+  final String model;
+  const BootsNameAndPrice({
+    Key? key,
+    required this.price,
+    required this.model,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +16,9 @@ class BootsNameAndPrice extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'Air-Max-270',
-            style: TextStyle(
+           Text(
+            model,
+            style: const TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
               fontSize: 22.0,
@@ -32,12 +38,12 @@ class BootsNameAndPrice extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     height: 9,
-                    width: '\$150.00'.length * 15,
+                    width: '\$${price}0'.length * 15,
                   ),
                 ),
-                const Text(
-                  '\$150.00',
-                  style: TextStyle(
+                 Text(
+                 '\$${price}0',
+                  style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 22.0,

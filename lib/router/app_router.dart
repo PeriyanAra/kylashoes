@@ -7,6 +7,7 @@ import 'package:kylashoes/screens/home/home_screen.dart';
 import 'package:kylashoes/screens/item_info/item_info_screen.dart';
 import 'package:kylashoes/screens/profile/profile_screen.dart';
 import 'package:kylashoes/screens/bag/bag_screen.dart';
+import 'package:kylashoes/view_models/shoe_view_model.dart';
 
 part 'app_router.gr.dart';
 

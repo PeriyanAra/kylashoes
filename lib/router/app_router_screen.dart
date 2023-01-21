@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:kylashoes/common/widgets/bottom_navigation/buttom_navigation_bar.dart';
 import 'package:kylashoes/router/app_router.dart';
-
 class AppRouterScreen extends StatelessWidget {
   const AppRouterScreen({super.key});
 
@@ -12,7 +11,7 @@ class AppRouterScreen extends StatelessWidget {
       routes: const [
         HomeTabRouter(children: [HomeRoute()]),
         FavoriteTabRouter(children: [FavoriteRoute()]),
-        StoreTabRouter(children: [StoreRoute()]),
+        StoreTabRouter(children: [BagRoute()]),
         ProfileTabRouter(children: [ProfileRoute()]),
       ],
       builder: (context, child, animation) {

@@ -31,7 +31,7 @@ class ShoeCard extends StatelessWidget {
       animation: animation,
       builder: (context, child) => GestureDetector(
         onTap: () {
-          context.router.push(const ItemInfoRoute());
+          context.router.push( ItemInfoRoute(shoeViewModel:shoeViewModel));
         },
         child: Stack(
           clipBehavior: Clip.none,
