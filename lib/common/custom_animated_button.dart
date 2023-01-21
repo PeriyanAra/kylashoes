@@ -22,7 +22,6 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: InkWell(
-        onTap: widget.onTap,
         borderRadius: const BorderRadius.all(
           Radius.circular(8.0),
         ),
@@ -35,6 +34,7 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton> {
           setState(() {
             isPressed = !isPressed;
           });
+          widget.onTap();
         },
         child: AnimatedContainer(
           width: isPressed
