@@ -34,7 +34,7 @@ class ItemInfoScreenAppBar extends StatelessWidget {
               ),
             ),
             CustomButton(
-              onTap: () {},
+              onTap: () { },
               child: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(

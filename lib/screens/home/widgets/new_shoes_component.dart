@@ -17,21 +17,21 @@ class NewShoesComponent extends StatefulWidget {
 }
 
 class _NewShoesComponentState extends State<NewShoesComponent> {
-  bool _isLiked = false;
 
-  @override
-  void initState() {
-    _isLiked = false;
 
-    super.initState();
-  }
+  bool likeButtonPressed = false;
+  double buttonSize = 30;
+
+  IconData icon = Icons.favorite_border_rounded;
+
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(
+      padding:  const EdgeInsets.only(
         left: 6,
-        top: 6,
+        top:6,
         right: 6,
         bottom: 14,
       ),
@@ -58,40 +58,60 @@ class _NewShoesComponentState extends State<NewShoesComponent> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Transform.rotate(
-                      alignment: const Alignment(-0.10, 3.5),
-                      angle: -pi * 0.5,
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: 80,
-                        color: Colors.pink,
-                        child: const Text(
-                          'NEW',
-                          style: TextStyle(
-                            color: Colors.white,
+                    Padding(
+                      padding:  EdgeInsets.only(top: buttonSize==30? 0:4.7),
+                      child: Transform.rotate(
+                        alignment: const Alignment(-0.10, 3.5),
+                        angle: -pi * 0.5,
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: 80,
+                          color: Colors.pink,
+                          child: const Text(
+                            'NEW',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    CustomButton(
-                      onTap: () {
+                    InkWell(
+                      onTapDown: (details) {
                         setState(() {
-                          _isLiked = !_isLiked;
+                          buttonSize = 25;
+                        });
+                      },
+                      onTapUp: (details) {
+                        if (buttonSize == 25) {
+                          if (icon == Icons.favorite) {
+                            setState(() {
+                              icon = Icons.favorite_border_rounded;
+                            });
+                          } else {
+                            setState(() {
+                              icon = Icons.favorite;
+                            });
+                          }
+                        }
+                        setState(() {
+                          buttonSize = 30;
                         });
                       },
                       child: AnimatedContainer(
-                        // color: _isLiked ? Colors.pink : null,
-                        duration: const Duration(milliseconds: 600),
-                        child: _isLiked
-                            ? const Icon(
-                                Icons.favorite,
-                                color: Colors.pink,
-                              )
-                            : const Icon(
-                                Icons.favorite_border_rounded,
-                              ),
+                        duration: const Duration(milliseconds: 10),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 40),
+                          child: Icon(
+                            icon,
+                            color: icon == Icons.favorite
+                                ? Colors.pink
+                                : Colors.black,
+                            size: buttonSize,
+                          ),
+                        ),
                       ),
-                    )
+                    ),
                   ],
                 ),
                 const Spacer(),

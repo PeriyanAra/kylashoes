@@ -1,11 +1,16 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:kylashoes/screens/bag/widgets/bag_shoes_quantity.dart';
+import 'package:kylashoes/common/widgets/custom_button.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_shoes_value.dart';
 
 class BagShoesComponent extends StatefulWidget {
-  const BagShoesComponent({super.key});
+  const BagShoesComponent({
+    super.key,
+    required this.imageUrl,
+    required this.price,
+  });
+
+  final String imageUrl;
+  final double price;
 
   @override
   State<BagShoesComponent> createState() => _BagShoesComponentState();
@@ -15,7 +20,6 @@ class _BagShoesComponentState extends State<BagShoesComponent>
     with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
-  late AnimationStatus _animationStatus;
 
   @override
   void initState() {
@@ -31,22 +35,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
         () {
           setState(() {});
         },
-      )
-      ..addStatusListener(
-        (status) {
-          if (status == AnimationStatus.forward) {
-            _animationStatus = status;
-          } else if (status == AnimationStatus.reverse) {
-            _animationStatus = status;
-          }
-
-          log(
-            _animationStatus.toString(),
-            name: '_animationStatus',
-          );
-        },
       );
-
     _animationController.forward();
 
     super.initState();
@@ -120,7 +109,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                   ),
                   const BagShoesValue(
                     child: Text(
-                      '\$127.00',
+                      '\$price',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
@@ -128,12 +117,35 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                     ),
                   ),
                   BagShoesValue(
-                    child: BagShoesQuantity(
-                      quantity: 1,
-                      onMinusPressed: () {
-                        _animationController.reverse();
-                      },
-                      onPlusPressed: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomButton(
+                          color: Colors.grey[300],
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 2,
+                          ),
+                          onTap: () {},
+                          child: const Text('-'),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 2,
+                          ),
+                          child: const Text('1'),
+                        ),
+                        CustomButton(
+                          color: Colors.grey[300],
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 2,
+                          ),
+                          onTap: () {},
+                          child: const Text('+'),
+                        ),
+                      ],
                     ),
                   ),
                 ],
