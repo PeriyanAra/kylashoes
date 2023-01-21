@@ -22,16 +22,11 @@ class _BagShoesValueState extends State<BagShoesValue>
     );
 
     _animation = Tween<Offset>(
-      begin: const Offset(10, 0),
+      begin: const Offset(1.5, 0),
       end: Offset.zero,
-    ).animate(_animationController)
-      ..addListener(
-        () {
-          setState(() {});
-        },
-      );
+    ).animate(_animationController);
 
-    _animationController.fling();
+    _animationController.forward();
 
     super.initState();
   }
