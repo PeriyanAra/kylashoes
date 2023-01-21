@@ -3,7 +3,14 @@ import 'package:kylashoes/common/widgets/custom_button.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_shoes_value.dart';
 
 class BagShoesComponent extends StatefulWidget {
-  const BagShoesComponent({super.key});
+  const BagShoesComponent({
+    super.key,
+    required this.imageUrl,
+    required this.price,
+  });
+
+  final String imageUrl;
+  final double price;
 
   @override
   State<BagShoesComponent> createState() => _BagShoesComponentState();
@@ -66,7 +73,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                       height: _animation.value + 50,
                       duration: const Duration(milliseconds: 600),
                       child: Image.asset(
-                        'assets/images/sneaker_01.png',
+                        widget.imageUrl,
                       ),
                     ),
                   ),
@@ -91,7 +98,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                   ),
                   const BagShoesValue(
                     child: Text(
-                      '\$127.00',
+                      '\$price',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,

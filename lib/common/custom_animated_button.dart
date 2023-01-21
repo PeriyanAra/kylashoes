@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 class CustomAnimatedButton extends StatefulWidget {
   final String text;
+  final Function() onTap;
+
   const CustomAnimatedButton({
     Key? key,
     required this.text,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -19,6 +22,7 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: InkWell(
+        onTap: widget.onTap,
         borderRadius: const BorderRadius.all(
           Radius.circular(8.0),
         ),
@@ -45,7 +49,7 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton> {
             ),
             color: isPressed
                 ? const Color.fromARGB(255, 249, 117, 187)
-                : Color.fromRGBO(255, 20, 147, 1),
+                : const Color.fromRGBO(255, 20, 147, 1),
           ),
           child: Text(
             widget.text,

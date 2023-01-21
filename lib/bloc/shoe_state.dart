@@ -7,6 +7,7 @@ class ShoeInitialState extends ShoeState {}
 
 class ShoeLoadingState extends ShoeState {}
 
+
 class ShoeLoadedState extends ShoeState {
   final List<ShoeViewModel> shoeViewModels;
 

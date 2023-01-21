@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kylashoes/bloc/shoe_bloc.dart';
 import 'package:kylashoes/common/custom_animated_button.dart';
 import 'package:kylashoes/screens/item_info/widgets/boots_description_text.dart';
 import 'package:kylashoes/screens/item_info/widgets/boots_name_and_price.dart';
@@ -60,8 +62,17 @@ class _ItemInfoScreenState extends State<ItemInfoScreen> {
                 const SizedBox(
                   height: 12.0,
                 ),
-                const BootsSizeListView(),    
-               const CustomAnimatedButton(text: 'ADD TO BAG',)
+                const BootsSizeListView(),
+                CustomAnimatedButton(
+                  text: 'ADD TO BAG',
+                  onTap: () {
+                    context.read<ShoeBloc>().add(
+                          GetShoesItems(
+                            shoeViewModel: widget.shoeViewModel,
+                          ),
+                        );
+                  },
+                )
               ],
             ),
           )
