@@ -97,17 +97,11 @@ class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
           }
 
           return ShoeCard(
-            animation: leftPaddingAnimation,
             shoeViewModel: shoesViewModels[itemIndex],
+            animation: leftPaddingAnimation,
+            hasPaddingAnimation: index == pageOffset!.floor() - 1,
             angle: index == pageOffset?.floor() ? -angle : angle,
-            padding: EdgeInsets.only(
-              right: index == pageOffset!.floor() - 1
-                  ? leftPaddingAnimation.value
-                  : 10 + (100 * angle).abs(),
-              left: 20 + (100 * angle).abs(),
-              top: 100 - scale * 25,
-              bottom: 100 - scale * 25,
-            ),
+            scale: scale,
           );
         },
       ),
