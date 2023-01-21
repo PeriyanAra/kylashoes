@@ -53,6 +53,12 @@ class _$AppRouter extends RootStackRouter {
         child: const HomeScreen(),
       );
     },
+    ItemInfoRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const ItemInfoScreen(),
+      );
+    },
     FavoriteRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
@@ -94,7 +100,12 @@ class _$AppRouter extends RootStackRouter {
                   HomeRoute.name,
                   path: '',
                   parent: HomeTabRouter.name,
-                )
+                ),
+                RouteConfig(
+                  ItemInfoRoute.name,
+                  path: '',
+                  parent: HomeTabRouter.name,
+                ),
               ],
             ),
             RouteConfig(
@@ -213,6 +224,18 @@ class HomeRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'HomeRoute';
+}
+
+/// generated route for
+/// [ItemInfoScreen]
+class ItemInfoRoute extends PageRouteInfo<void> {
+  const ItemInfoRoute()
+      : super(
+          ItemInfoRoute.name,
+          path: '',
+        );
+
+  static const String name = 'ItemInfoRoute';
 }
 
 /// generated route for
