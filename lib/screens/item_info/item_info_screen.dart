@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kylashoes/common/custom_animated_button.dart';
 import 'package:kylashoes/screens/item_info/widgets/boots_description_text.dart';
 import 'package:kylashoes/screens/item_info/widgets/boots_name_and_price.dart';
 import 'package:kylashoes/screens/item_info/widgets/boots_size_country.dart';
@@ -59,7 +60,8 @@ class _ItemInfoScreenState extends State<ItemInfoScreen> {
                 const SizedBox(
                   height: 12.0,
                 ),
-                const BootsSizeListView(),
+                const BootsSizeListView(),    
+               const CustomAnimatedButton(text: 'ADD TO BAG',)
               ],
             ),
           )
