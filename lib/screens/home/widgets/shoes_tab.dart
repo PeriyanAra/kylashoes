@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:kylashoes/screens/home/widgets/shoes_list.dart';
 import 'package:kylashoes/screens/home/widgets/tab_content.dart';
 import 'package:kylashoes/screens/home/widgets/shoes_tab_bar.dart';
 
@@ -42,39 +43,31 @@ class _ShoesTabState extends State<ShoesTab>
             tabController: _tabController,
             tabsCount: _shoesModelsTabs.length,
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          Stack(
             children: [
-              Column(
-                children: List.generate(
-                  _shoesTypeTabs.length,
-                  (index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 50),
-                      child: Transform.rotate(
-                        angle: -pi * 0.5,
-                        child: Text(
-                          _shoesTypeTabs[index],
+              Positioned(
+                top: 50,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: List.generate(
+                    _shoesTypeTabs.length,
+                    (index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 50),
+                        child: Transform.rotate(
+                          angle: -pi * 0.5,
+                          child: Text(
+                            _shoesTypeTabs[index],
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  color: Colors.red,
-                  height: 300,
-                  child: TabBarView(
-                    controller: _tabController,
-                    children: List.generate(
-                      _shoesModelsTabs.length,
-                      (index) => TabContent(
-                        data: _shoesModelsTabs[index],
-                      ),
-                    ),
+                      );
+                    },
                   ),
                 ),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: const ShoesList(),
               ),
             ],
           ),

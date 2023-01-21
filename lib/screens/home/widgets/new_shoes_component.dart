@@ -2,15 +2,15 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:kylashoes/common/widgets/custom_button.dart';
-import 'package:kylashoes/screens/home/view_models/shoes_view_model.dart';
+import 'package:kylashoes/screens/home/view_models/shoe_view_model.dart';
 
 class NewShoesComponent extends StatefulWidget {
   const NewShoesComponent({
     super.key,
-    required this.shoes,
+    required this.shoe,
   });
 
-  final ShoesViewModel shoes;
+  final ShoeViewModel shoe;
 
   @override
   State<NewShoesComponent> createState() => _NewShoesComponentState();
@@ -51,7 +51,7 @@ class _NewShoesComponentState extends State<NewShoesComponent> {
       width: MediaQuery.of(context).size.width / 2 - 15,
       child: Stack(
         children: [
-          Image.asset(widget.shoes.image),
+          Image.asset(widget.shoe.imagePath),
           Center(
             child: Column(
               children: [
@@ -81,32 +81,31 @@ class _NewShoesComponentState extends State<NewShoesComponent> {
                       },
                       child: AnimatedContainer(
                         // color: _isLiked ? Colors.pink : null,
-                        duration: const Duration(
-                          milliseconds: 600
-                        ),
-                        child: _isLiked ? const Icon(
-                          Icons.favorite,
-                          color: Colors.pink,
-                        ) : const Icon(
-                          Icons.favorite_border_rounded,
-                        )
+                        duration: const Duration(milliseconds: 600),
+                        child: _isLiked
+                            ? const Icon(
+                                Icons.favorite,
+                                color: Colors.pink,
+                              )
+                            : const Icon(
+                                Icons.favorite_border_rounded,
+                              ),
                       ),
                     )
                   ],
                 ),
                 const Spacer(),
                 Text(
-                  widget.shoes.name,
+                  widget.shoe.model,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 9),
-                Text('\$${widget.shoes.price}')
+                Text('\$${widget.shoe.price}')
               ],
             ),
           ),
-          
         ],
       ),
     );
