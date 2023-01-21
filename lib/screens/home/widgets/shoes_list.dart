@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:kylashoes/screens/home/view_models/shoe_view_model.dart';
+import 'package:kylashoes/view_models/shoe_view_model.dart';
 import 'package:kylashoes/screens/home/widgets/shoe_card.dart';
 
 class ShoesList extends StatefulWidget {
@@ -117,6 +117,7 @@ class ShoesListState extends State<ShoesList> with TickerProviderStateMixin {
 
 final shoesViewModels = [
   ShoeViewModel(
+    id:0,
     imagePath: 'assets/images/sneaker_01.png',
     model: 'Air-max',
     price: 130,
@@ -125,6 +126,7 @@ final shoesViewModels = [
     backgroundColor: const Color.fromRGBO(115, 202, 220, 1),
   ),
   ShoeViewModel(
+    id:1,
     imagePath: 'assets/images/sneaker_02.png',
     model: 'Air-270',
     price: 130,
@@ -133,6 +135,7 @@ final shoesViewModels = [
     backgroundColor: const Color.fromRGBO(173, 163, 231, 1),
   ),
   ShoeViewModel(
+    id:2,
     imagePath: 'assets/images/sneaker_03.png',
     model: 'Epic-react',
     price: 130,
@@ -141,6 +144,7 @@ final shoesViewModels = [
     backgroundColor: const Color.fromRGBO(37, 114, 168, 1),
   ),
   ShoeViewModel(
+    id:3,
     imagePath: 'assets/images/sneaker_04.png',
     model: 'Hustle',
     price: 130,

@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:kylashoes/common/widgets/custom_button.dart';
-import 'package:kylashoes/screens/home/view_models/shoe_view_model.dart';
+import 'package:kylashoes/view_models/shoe_view_model.dart';
 
 class NewShoesComponent extends StatefulWidget {
   const NewShoesComponent({
