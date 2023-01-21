@@ -12,6 +12,7 @@ class ItemContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      clipBehavior: Clip.none,
       alignment: AlignmentDirectional.center,
       children: [
         Positioned(
@@ -31,11 +32,13 @@ class ItemContainer extends StatelessWidget {
           child: ImageShadow(
             offset: const Offset(14, 10),
             sigma: 20,
-            opacity: 0.35,
-            child: Image.asset(
-              imageUrl,
-              width: 350,
-              height: 350,
+            opacity: 0.3,
+            child: Hero(
+              tag: imageUrl,
+              child: Image.asset(
+                imageUrl,
+                height: 350,
+              ),
             ),
           ),
         ),

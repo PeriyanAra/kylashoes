@@ -52,7 +52,7 @@ class ShoeCardMainInfo extends StatelessWidget {
             overflow: TextOverflow.fade,
           ),
           Text(
-            '\$${shoeViewModel.price}'.padLeft(2, '0'),
+            '\$${shoeViewModel.price}0',
             style: const TextStyle(
               fontWeight: FontWeight.w400,
               color: Colors.white,
