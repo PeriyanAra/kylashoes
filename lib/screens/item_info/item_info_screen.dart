@@ -10,9 +10,14 @@ import 'package:kylashoes/view_models/shoe_view_model.dart';
 
 class ItemInfoScreen extends StatefulWidget {
   final ShoeViewModel shoeViewModel;
+  final String imageHeroTag;
+  final String backgroundHeroTag;
+
   const ItemInfoScreen({
     Key? key,
     required this.shoeViewModel,
+    required this.imageHeroTag,
+    required this.backgroundHeroTag,
   }) : super(key: key);
 
   @override
@@ -23,38 +28,67 @@ class _ItemInfoScreenState extends State<ItemInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
-        child: ItemInfoScreenAppBar(
-          itemName: widget.shoeViewModel.producer,
-        ),
-      ),
-      body: ListView(
-        children: [
-          ItemContainer(imageUrl: widget.shoeViewModel.imagePath),
-          const SizedBox(height: 30),
-          ItemPhotoHorizontalList(
-            imageUrl: [widget.shoeViewModel.imagePath],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                BootsNameAndPrice(
-                  price: widget.shoeViewModel.price,
-                  model: widget.shoeViewModel.model,
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Positioned(
+              right: -250,
+              top: -300,
+              child: Hero(
+                tag: widget.backgroundHeroTag,
+                child: Container(
+                  width: 700,
+                  height: 700,
+                  decoration: BoxDecoration(
+                    color: widget.shoeViewModel.backgroundColor,
+                    shape: BoxShape.circle,
+                  ),
                 ),
-                const BootsDescriptionText(),
-                const BootsSizeCountry(),
-                const SizedBox(
-                  height: 12.0,
-                ),
-                const BootsSizeListView(),
-              ],
+              ),
             ),
-          ),
-        ],
+            SafeArea(
+              child: Column(
+                children: [
+                  ItemInfoScreenAppBar(
+                    itemName: widget.shoeViewModel.producer,
+                    backgroundColor: widget.shoeViewModel.backgroundColor,
+                  ),
+                  ItemContainer(
+                    imageUrl: widget.shoeViewModel.imagePath,
+                    imageHeroTag: widget.imageHeroTag,
+                    backgroundHeroTag: widget.backgroundHeroTag,
+                    backgroundColor: widget.shoeViewModel.backgroundColor,
+                  ),
+                  const SizedBox(height: 30),
+                  ItemPhotoHorizontalList(
+                    imageUrl: [widget.shoeViewModel.imagePath],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        BootsNameAndPrice(
+                          price: widget.shoeViewModel.price,
+                          model: widget.shoeViewModel.model,
+                        ),
+                        const BootsDescriptionText(),
+                        const BootsSizeCountry(),
+                        const SizedBox(
+                          height: 12.0,
+                        ),
+                        const BootsSizeListView(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

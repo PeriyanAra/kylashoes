@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:kylashoes/common/widgets/image_shadow.dart';
 import 'package:kylashoes/screens/home/widgets/shoe_card_main_info.dart';
@@ -13,7 +12,6 @@ class ShoeCard extends StatefulWidget {
   final bool isPrevious;
   final bool isCurrent;
   final bool isAbsoluteCurrent;
-  final bool isForward;
 
   const ShoeCard({
     super.key,
@@ -24,7 +22,6 @@ class ShoeCard extends StatefulWidget {
     required this.animation,
     required this.isCurrent,
     required this.isAbsoluteCurrent,
-    required this.isForward,
   });
 
   @override
@@ -45,10 +42,8 @@ class _ShoeCardState extends State<ShoeCard> {
   void didUpdateWidget(covariant ShoeCard oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.isForward && oldWidget.angle < widget.angle) {
+    if (oldWidget.angle < widget.angle) {
       shoePosition = widget.angle * 300 - 21;
-    } else if (!widget.isForward && oldWidget.angle > widget.angle) {
-      shoePosition = widget.angle - 21;
     }
 
     cardRotationAngle = widget.isCurrent ? -widget.angle : widget.angle;
@@ -56,7 +51,8 @@ class _ShoeCardState extends State<ShoeCard> {
 
   @override
   Widget build(BuildContext context) {
-    cardRotationAngle = widget.isCurrent ? -widget.angle : widget.angle;
+    final imageHeroTag = DateTime.now().toString();
+    final backgroundHeroTag = '2${DateTime.now().toString()}';
 
     return GestureDetector(
       onTap: () {
@@ -64,6 +60,8 @@ class _ShoeCardState extends State<ShoeCard> {
           MaterialPageRoute(
             builder: (context) => ItemInfoScreen(
               shoeViewModel: widget.shoeViewModel,
+              imageHeroTag: imageHeroTag,
+              backgroundHeroTag: backgroundHeroTag,
             ),
           ),
         );
@@ -75,10 +73,8 @@ class _ShoeCardState extends State<ShoeCard> {
             animation: widget.animation,
             builder: (context, child) => Container(
               padding: EdgeInsets.only(
-                right: widget.isForward
-                    ? widget.isPrevious
-                        ? widget.animation.value
-                        : 20 + (100 * cardRotationAngle).abs()
+                right: widget.isPrevious
+                    ? widget.animation.value
                     : 20 + (100 * cardRotationAngle).abs(),
                 left: 20 + (100 * cardRotationAngle).abs(),
                 top: 100 - widget.scale * 25,
@@ -95,34 +91,36 @@ class _ShoeCardState extends State<ShoeCard> {
                     cardRotationAngle,
                   ),
                 alignment: Alignment.center,
-                child: ShoeCardMainInfo(
-                  shoeViewModel: widget.shoeViewModel,
+                child: Hero(
+                  tag: backgroundHeroTag,
+                  child: Material(
+                    color: Colors.transparent,
+                    child: ShoeCardMainInfo(
+                      shoeViewModel: widget.shoeViewModel,
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
           Positioned(
-            right: widget.isForward
-                ? widget.isAbsoluteCurrent
-                    ? -21
-                    : widget.isCurrent
-                        ? shoePosition
-                        : widget.isPrevious
-                            ? shoePosition
-                            : -21
-                : widget.isPrevious
+            right: widget.isAbsoluteCurrent
+                ? -21
+                : widget.isCurrent
                     ? shoePosition
-                    : -21,
+                    : widget.isPrevious
+                        ? shoePosition
+                        : -21,
             top: 80,
             child: Transform.rotate(
               angle: !widget.isCurrent ? -widget.angle : 0,
               alignment: const Alignment(0.5, -0.5),
-              child: ImageShadow(
-                offset: const Offset(14, 10),
-                sigma: 20,
-                opacity: 0.35,
-                child: Hero(
-                  tag: widget.shoeViewModel,
+              child: Hero(
+                tag: imageHeroTag,
+                child: ImageShadow(
+                  offset: const Offset(14, 10),
+                  sigma: 20,
+                  opacity: 0.35,
                   child: Image.asset(
                     widget.shoeViewModel.imagePath,
                     width: 250,
