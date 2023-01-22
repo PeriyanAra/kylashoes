@@ -41,7 +41,7 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton> {
               ? MediaQuery.of(context).size.width * 0.7
               : MediaQuery.of(context).size.width * 0.8,
           height: isPressed ? 45 : 50,
-          duration: const Duration(seconds: 3),
+          duration: const Duration(milliseconds: 100),
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(

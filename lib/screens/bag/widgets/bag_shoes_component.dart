@@ -1,18 +1,19 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kylashoes/bloc/shoe_bloc.dart';
 import 'package:kylashoes/common/widgets/custom_button.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_shoes_value.dart';
+import 'package:kylashoes/view_models/shoe_view_model.dart';
 
 class BagShoesComponent extends StatefulWidget {
   const BagShoesComponent({
     super.key,
-    required this.imageUrl,
-    required this.price,
+    required this.shoe,
+    required this.count,
   });
 
-  final String imageUrl;
-  final double price;
+  final ShoeViewModel shoe;
+  final int count;
 
   @override
   State<BagShoesComponent> createState() => _BagShoesComponentState();
@@ -87,7 +88,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                         duration: const Duration(milliseconds: 300),
                         height: _animation.value + 30,
                         child: Image.asset(
-                          'assets/images/sneaker_01.png',
+                          widget.shoe.imagePath,
                         ),
                       ),
                     ),
@@ -103,18 +104,18 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const BagShoesValue(
+                  BagShoesValue(
                     child: Text(
-                      'NIKE AIR-127',
-                      style: TextStyle(
+                      widget.shoe.model,
+                      style: const TextStyle(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
-                  const BagShoesValue(
+                  BagShoesValue(
                     child: Text(
-                      '\$price',
-                      style: TextStyle(
+                      widget.shoe.price.toString(),
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       ),
@@ -130,7 +131,9 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                             horizontal: 12,
                             vertical: 2,
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            _handleRemove(context);
+                          },
                           child: const Text('-'),
                         ),
                         Container(
@@ -138,7 +141,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                             horizontal: 12,
                             vertical: 2,
                           ),
-                          child: const Text('1'),
+                          child: Text(widget.count.toString()),
                         ),
                         CustomButton(
                           color: Colors.grey[300],
@@ -159,5 +162,11 @@ class _BagShoesComponentState extends State<BagShoesComponent>
         ),
       ),
     );
+  }
+
+  void _handleRemove(BuildContext context) {
+    context.read<ShoeBloc>().add(DeleteShoesItem(
+          shoeViewModel: widget.shoe,
+        ));
   }
 }

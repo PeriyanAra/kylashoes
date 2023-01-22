@@ -1,7 +1,7 @@
 part of 'shoe_bloc.dart';
 
 class ShoeState {
-  final List<ShoeViewModel> shoeViewModels;
+  final Map<ShoeViewModel, int> shoeViewModels;
 
   ShoeState({required this.shoeViewModels});
 }

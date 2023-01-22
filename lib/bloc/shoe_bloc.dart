@@ -9,7 +9,7 @@ class ShoeBloc extends Bloc<ShoeEvent, ShoeState> {
   ShoeBloc()
       : super(
           ShoeState(
-            shoeViewModels: [],
+            shoeViewModels: {},
           ),
         ) {
     on<AddShoes>(_handleAddShoes);
@@ -20,11 +20,15 @@ class ShoeBloc extends Bloc<ShoeEvent, ShoeState> {
     AddShoes event,
     Emitter<ShoeState> emit,
   ) async {
-    List<ShoeViewModel> newShoeViewModels = [...state.shoeViewModels];
+    Map<ShoeViewModel, int> newShoeViewModels = {...state.shoeViewModels};
 
-    newShoeViewModels.add(
-      event.shoeViewModel,
-    );
+    if (newShoeViewModels[event.shoeViewModel] == null) {
+      newShoeViewModels[event.shoeViewModel] = 1;
+    } else {
+      newShoeViewModels[event.shoeViewModel] =
+          newShoeViewModels[event.shoeViewModel]! + 1;
+    }
+
     emit(
       ShoeState(
         shoeViewModels: newShoeViewModels,
@@ -36,11 +40,15 @@ class ShoeBloc extends Bloc<ShoeEvent, ShoeState> {
     DeleteShoesItem event,
     Emitter<ShoeState> emit,
   ) async {
-    List<ShoeViewModel> newShoeViewModels = [...state.shoeViewModels];
+    Map<ShoeViewModel, int> newShoeViewModels = {...state.shoeViewModels};
 
-    newShoeViewModels.removeWhere(
-      (element) => element.id == event.id,
-    );
+    if (newShoeViewModels[event.shoeViewModel] == 1) {
+      newShoeViewModels.remove(event.shoeViewModel);
+    } else {
+      newShoeViewModels[event.shoeViewModel] =
+          newShoeViewModels[event.shoeViewModel]! - 1;
+    }
+
     emit(
       ShoeState(shoeViewModels: newShoeViewModels),
     );

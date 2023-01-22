@@ -10,7 +10,7 @@ class AddShoes extends ShoeEvent {
 }
 
 class DeleteShoesItem extends ShoeEvent {
-  final int id;
+  final ShoeViewModel shoeViewModel;
 
-  DeleteShoesItem({required this.id});
+  DeleteShoesItem({required this.shoeViewModel});
 }

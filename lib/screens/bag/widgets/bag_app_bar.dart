@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:kylashoes/common/widgets/custom_button.dart';
 
 class BagAppBar extends StatelessWidget {
-  const BagAppBar({super.key});
+  final int itemsCount;
+
+  const BagAppBar({
+    super.key,
+    required this.itemsCount,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +34,8 @@ class BagAppBar extends StatelessWidget {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
+              children: [
+                const Text(
                   'My Bag',
                   style: TextStyle(
                     fontSize: 20,
@@ -38,8 +43,8 @@ class BagAppBar extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Total Items 3',
-                  style: TextStyle(
+                  'Total Items $itemsCount',
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
