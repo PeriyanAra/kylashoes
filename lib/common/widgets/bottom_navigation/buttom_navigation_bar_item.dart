@@ -26,7 +26,10 @@ class CustomBottomNavigationBarItem extends StatelessWidget {
           bottom: MediaQuery.of(context).padding.bottom,
         ),
         padding: const EdgeInsets.symmetric(vertical: 10),
-        child: Icon(icon, color: isSelected ? Colors.pink : null,),
+        child: Icon(
+          icon,
+          color: isSelected ? Colors.pink : null,
+        ),
       ),
     );
   }
