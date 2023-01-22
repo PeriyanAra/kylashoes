@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:kylashoes/common/widgets/custom_button.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_shoes_value.dart';
@@ -20,9 +22,12 @@ class _BagShoesComponentState extends State<BagShoesComponent>
     with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
+  var _animationStatus = AnimationStatus.forward;
 
   @override
   void initState() {
+    super.initState();
+
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(
@@ -33,18 +38,24 @@ class _BagShoesComponentState extends State<BagShoesComponent>
     _animation = Tween<double>(begin: 0, end: 100).animate(_animationController)
       ..addListener(
         () {
-          setState(() {});
+          setState(() {
+            _animationStatus = _animationController.status;
+          });
         },
       );
     _animationController.forward();
+  }
 
-    super.initState();
+  @override
+  void dispose() {
+    _animationController.dispose();
+
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width - 40,
       height: 100,
       child: Center(
         child: Row(
@@ -64,24 +75,17 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                   ),
                 ),
                 Positioned(
-                  bottom: 0,
-                  left: -14,
+                  bottom: 10,
+                  left: 10,
                   child: Transform.rotate(
                     angle: -0.3,
                     child: AnimatedOpacity(
-                      opacity: _animationStatus == AnimationStatus.forward
-                          ? 1
-                          : 0,
+                      opacity:
+                          _animationStatus == AnimationStatus.forward ? 0 : 1,
                       duration: const Duration(milliseconds: 300),
                       child: AnimatedContainer(
-                        alignment: Alignment.center,
-                        curve: _animationStatus == AnimationStatus.forward
-                            ? Curves.elasticOut
-                            : Curves.linear,
-                        height: _animationStatus == AnimationStatus.forward
-                            ? _animation.value + 50
-                            : _animation.value + 1,
-                        duration: const Duration(milliseconds: 1000),
+                        duration: const Duration(milliseconds: 300),
+                        height: _animation.value + 30,
                         child: Image.asset(
                           'assets/images/sneaker_01.png',
                         ),
@@ -155,12 +159,5 @@ class _BagShoesComponentState extends State<BagShoesComponent>
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-
-    super.dispose();
   }
 }

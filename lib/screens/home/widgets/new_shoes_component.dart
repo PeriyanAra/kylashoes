@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:kylashoes/common/widgets/custom_button.dart';
 import 'package:kylashoes/view_models/shoe_view_model.dart';
 
 class NewShoesComponent extends StatefulWidget {
@@ -17,21 +16,17 @@ class NewShoesComponent extends StatefulWidget {
 }
 
 class _NewShoesComponentState extends State<NewShoesComponent> {
-
-
   bool likeButtonPressed = false;
   double buttonSize = 30;
 
   IconData icon = Icons.favorite_border_rounded;
 
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:  const EdgeInsets.only(
+      padding: const EdgeInsets.only(
         left: 6,
-        top:6,
+        top: 6,
         right: 6,
         bottom: 14,
       ),
@@ -59,7 +54,7 @@ class _NewShoesComponentState extends State<NewShoesComponent> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding:  EdgeInsets.only(top: buttonSize==30? 0:4.7),
+                      padding: EdgeInsets.only(top: buttonSize == 30 ? 0 : 4.7),
                       child: Transform.rotate(
                         alignment: const Alignment(-0.10, 3.5),
                         angle: -pi * 0.5,

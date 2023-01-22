@@ -1,4 +1,14 @@
 {
+    "dart.flutterSdkPath": ".fvm/flutter_sdk",
+    "build-runner.flutterPath": ".fvm/flutter_sdk/bin/flutter",
+    // Remove .fvm files from search
+    "search.exclude": {
+        "**/.fvm": true
+    },
+    // Remove from file watching
+    "files.watcherExclude": {
+        "**/.fvm": true
+    },
     "cSpell.words": [
         "kylashoes"
     ]
