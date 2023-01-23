@@ -143,7 +143,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                   BagShoesValue(
                     isRemove: _localComponentCount == 0,
                     child: BagShoesQuantity(
-                      quantity: widget.count,
+                      quantity: _localComponentCount,
                       onMinusPressed: () {
                         _localComponentCount--;
 
