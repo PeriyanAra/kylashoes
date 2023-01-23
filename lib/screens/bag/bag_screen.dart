@@ -19,36 +19,53 @@ class BagScreen extends StatefulWidget {
 
 class _BagScreenState extends State<BagScreen> {
   final GlobalKey<AnimatedListState> _key = GlobalKey();
+  late BagBloc _bagBloc;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _bagBloc = context.read<BagBloc>();
+  }
 
   void _onRemoveShoe(
     int index,
     BuildContext context,
     ShoeViewModel currentShoe,
     int count,
-  ) {
-    AnimatedList.of(context).removeItem(
-      index,
-      (context, animation) => FadeTransition(
-        opacity: animation,
-        child: SizeTransition(
-          key: UniqueKey(),
-          sizeFactor: animation,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40),
-              child: BagShoesComponent(
-                shoe: currentShoe,
-                count: count,
-                onRemove: () => _onRemoveShoe(
-                  index,
-                  context,
-                  currentShoe,
-                  count,
+  ) async {
+    if (count == 1) {
+      AnimatedList.of(context).removeItem(
+        index,
+        (context, animation) => FadeTransition(
+          opacity: animation,
+          child: SizeTransition(
+            sizeFactor: animation,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 40),
+                child: BagShoesComponent(
+                  shoe: currentShoe,
+                  count: count,
+                  onRemove: () => _onRemoveShoe(
+                    index,
+                    context,
+                    currentShoe,
+                    count,
+                  ),
                 ),
               ),
             ),
           ),
         ),
+      );
+
+      await Future.delayed(const Duration(milliseconds: 300));
+    }
+
+    _bagBloc.add(
+      DeleteShoesItem(
+        shoeViewModel: currentShoe,
       ),
     );
   }

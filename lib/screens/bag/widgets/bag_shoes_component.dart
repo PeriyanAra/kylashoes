@@ -20,8 +20,6 @@ class BagShoesComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<BagBloc>();
-
     return SizedBox(
       width: MediaQuery.of(context).size.width - 40,
       height: 100,
@@ -81,9 +79,7 @@ class BagShoesComponent extends StatelessWidget {
                 ),
                 BagShoesQuantity(
                   quantity: count,
-                  onMinusPressed: () {
-                    _onMinusPressed(bloc);
-                  },
+                  onMinusPressed: onRemove,
                   onPlusPressed: () {
                     _onPlusPressed(context);
                   },
@@ -102,15 +98,5 @@ class BagShoesComponent extends StatelessWidget {
             shoeViewModel: shoe,
           ),
         );
-  }
-
-  Future<void> _onMinusPressed(BagBloc bloc) async {
-    bloc.add(
-      DeleteShoesItem(
-        shoeViewModel: shoe,
-      ),
-    );
-
-    if (count == 1) onRemove();
   }
 }
