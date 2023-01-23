@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:kylashoes/common/widgets/custom_button.dart';
 
@@ -15,7 +16,9 @@ class BagAppBar extends StatelessWidget {
       backgroundColor: Colors.white,
       elevation: 1,
       leading: CustomButton(
-        onTap: () {},
+        onTap: () {
+          context.router.pop();
+        },
         child: const Icon(
           Icons.keyboard_backspace_rounded,
           color: Colors.black,

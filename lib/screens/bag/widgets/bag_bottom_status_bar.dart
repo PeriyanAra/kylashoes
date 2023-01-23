@@ -7,7 +7,7 @@ class BagBottomStatusBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(
+      margin: EdgeInsets.only(
         bottom: MediaQuery.of(context).padding.bottom,
       ),
       height: 110,
