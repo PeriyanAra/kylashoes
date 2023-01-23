@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kylashoes/bloc/bag_bloc.dart';
 import 'package:kylashoes/router/app_router.dart';
 
 void main() async {
@@ -21,14 +23,17 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerDelegate: _appRouter.delegate(
-        navigatorObservers: () => [
-          HeroController(createRectTween: _createRectTween),
-        ],
+    return BlocProvider(
+      create: (context) => BagBloc(),
+      child: MaterialApp.router(
+        routerDelegate: _appRouter.delegate(
+          navigatorObservers: () => [
+            HeroController(createRectTween: _createRectTween),
+          ],
+        ),
+        routeInformationParser: _appRouter.defaultRouteParser(),
+        debugShowCheckedModeBanner: false,
       ),
-      routeInformationParser: _appRouter.defaultRouteParser(),
-      debugShowCheckedModeBanner: false,
     );
   }
 }

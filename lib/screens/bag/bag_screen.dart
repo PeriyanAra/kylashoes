@@ -1,27 +1,74 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kylashoes/bloc/bag_bloc.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_app_bar.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_bottom_status_bar.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_shoes_component.dart';
+import 'package:kylashoes/view_models/shoe_view_model.dart';
 
-class BagScreen extends StatelessWidget {
+class BagScreen extends StatefulWidget {
   const BagScreen({
     super.key,
   });
 
   @override
+  State<BagScreen> createState() => _BagScreenState();
+}
+
+class _BagScreenState extends State<BagScreen> {
+  final GlobalKey<AnimatedListState> _key = GlobalKey();
+
+  void _onRemoveShoe(
+    int index,
+    BuildContext context,
+    ShoeViewModel currentShoe,
+    int count,
+  ) {
+    AnimatedList.of(context).removeItem(
+      index,
+      (context, animation) => FadeTransition(
+        opacity: animation,
+        child: SizeTransition(
+          key: UniqueKey(),
+          sizeFactor: animation,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 40),
+              child: BagShoesComponent(
+                shoe: currentShoe,
+                count: count,
+                onRemove: () => _onRemoveShoe(
+                  index,
+                  context,
+                  currentShoe,
+                  count,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BagBloc, BagState>(
+    return BlocConsumer<BagBloc, BagState>(
+      listenWhen: (previous, current) =>
+          current.bagViewModel.shoeViewModels.length >
+          previous.bagViewModel.shoeViewModels.length,
+      listener: (context, state) => _key.currentState?.insertItem(0),
       builder: (context, state) {
         return Scaffold(
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(kToolbarHeight + 30),
             child: BagAppBar(
-              itemsCount: state.shoeViewModels.length,
+              itemsCount: state.bagViewModel.totalItems,
             ),
           ),
-          body: state.shoeViewModels.isEmpty
+          body: state.bagViewModel.shoeViewModels.isEmpty
               ? const Center(
                   child: Text('No items in bag'),
                 )
@@ -34,29 +81,52 @@ class BagScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: state.shoeViewModels.length,
-                            itemBuilder: (context, index) {
-                              final currentShoe =
-                                  state.shoeViewModels.keys.toList()[index];
-                              final count =
-                                  state.shoeViewModels[currentShoe] as int;
+                          child: AnimatedList(
+                            key: _key,
+                            initialItemCount:
+                                state.bagViewModel.shoeViewModels.length,
+                            itemBuilder: (context, index, animation) {
+                              final keys = state
+                                  .bagViewModel.shoeViewModels.keys
+                                  .toList();
 
-                              return Center(
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 40),
-                                  child: BagShoesComponent(
-                                    shoe: currentShoe,
-                                    count: count,
+                              final currentShoe =
+                                  state.bagViewModel.shoeViewModels[keys[index]]
+                                      ?['viewModel'] as ShoeViewModel;
+
+                              final count = state.bagViewModel
+                                  .shoeViewModels[keys[index]]?['count'] as int;
+
+                              return FadeTransition(
+                                opacity: animation,
+                                child: SizeTransition(
+                                  key: UniqueKey(),
+                                  sizeFactor: animation,
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 40,
+                                      ),
+                                      child: BagShoesComponent(
+                                        shoe: currentShoe,
+                                        count: count,
+                                        onRemove: () => _onRemoveShoe(
+                                          index,
+                                          context,
+                                          currentShoe,
+                                          count,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               );
                             },
                           ),
                         ),
-                        const BagBottomStatusBar()
+                        BagBottomStatusBar(
+                          totalPrice: state.bagViewModel.totalPrice,
+                        )
                       ],
                     ),
                   ),

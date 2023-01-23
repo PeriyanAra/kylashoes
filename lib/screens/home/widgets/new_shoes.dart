@@ -53,7 +53,7 @@ class _NewShoesState extends State<NewShoes> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width - 20,
+      width: MediaQuery.of(context).size.width,
       child: Column(
         children: [
           Row(
@@ -80,8 +80,15 @@ class _NewShoesState extends State<NewShoes> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List.generate(
               2,
-              (index) => NewShoesComponent(
-                shoe: _newShoes[index],
+              (index) => Expanded(
+                child: NewShoesComponent(
+                  shoe: _newShoes[index],
+                  margin: index == 0
+                      ? const EdgeInsets.only(
+                          right: 16,
+                        )
+                      : null,
+                ),
               ),
             ),
           ),

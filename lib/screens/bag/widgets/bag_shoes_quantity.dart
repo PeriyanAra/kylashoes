@@ -45,16 +45,28 @@ class _BagShoesQuantityState extends State<BagShoesQuantity>
           onTap: () {
             widget.onMinusPressed();
           },
-          color: Colors.grey[300],
           padding: const EdgeInsets.symmetric(
             horizontal: 12,
             vertical: 2,
           ),
-          child: const Text('-'),
+          decoration: const BoxDecoration(
+            color: Color.fromRGBO(243, 243, 243, 1),
+            borderRadius: BorderRadius.all(
+              Radius.circular(4),
+            ),
+          ),
+          child: const Text(
+            '-',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
         ),
         Container(
           alignment: Alignment.center,
           height: 21,
+          width: widget.quantity < 10 ? 32 : 46,
           padding: const EdgeInsets.symmetric(
             horizontal: 12,
           ),
@@ -62,6 +74,10 @@ class _BagShoesQuantityState extends State<BagShoesQuantity>
             position: _animation,
             child: Text(
               widget.quantity.toString(),
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ),
@@ -69,12 +85,23 @@ class _BagShoesQuantityState extends State<BagShoesQuantity>
           onTap: () {
             widget.onPlusPressed();
           },
-          color: Colors.grey[300],
+          decoration: const BoxDecoration(
+            color: Color.fromRGBO(243, 243, 243, 1),
+            borderRadius: BorderRadius.all(
+              Radius.circular(4),
+            ),
+          ),
           padding: const EdgeInsets.symmetric(
             horizontal: 12,
             vertical: 2,
           ),
-          child: const Text('+'),
+          child: const Text(
+            '+',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
         ),
       ],
     );

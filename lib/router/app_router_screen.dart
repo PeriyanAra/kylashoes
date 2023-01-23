@@ -10,31 +10,28 @@ class AppRouterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => BagBloc(),
-      child: AutoTabsRouter(
-        routes: const [
-          HomeTabRouter(children: [HomeRoute()]),
-          FavoriteTabRouter(children: [FavoriteRoute()]),
-          StoreTabRouter(children: [BagRoute()]),
-          ProfileTabRouter(children: [ProfileRoute()]),
-        ],
-        builder: (context, child, animation) {
-          final tabsRouter = AutoTabsRouter.of(context);
+    return AutoTabsRouter(
+      routes: const [
+        HomeTabRouter(children: [HomeRoute()]),
+        FavoriteTabRouter(children: [FavoriteRoute()]),
+        StoreTabRouter(children: [BagRoute()]),
+        ProfileTabRouter(children: [ProfileRoute()]),
+      ],
+      builder: (context, child, animation) {
+        final tabsRouter = AutoTabsRouter.of(context);
 
-          return Scaffold(
-            extendBody: true,
-            body: FadeTransition(
-              opacity: animation,
-              child: child,
-            ),
-            bottomNavigationBar: CustomBottomNavigationBar(
-              currentIndex: tabsRouter.activeIndex,
-              onTap: tabsRouter.setActiveIndex,
-            ),
-          );
-        },
-      ),
+        return Scaffold(
+          extendBody: true,
+          body: FadeTransition(
+            opacity: animation,
+            child: child,
+          ),
+          bottomNavigationBar: CustomBottomNavigationBar(
+            currentIndex: tabsRouter.activeIndex,
+            onTap: tabsRouter.setActiveIndex,
+          ),
+        );
+      },
     );
   }
 }

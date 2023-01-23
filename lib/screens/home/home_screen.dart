@@ -28,16 +28,19 @@ class HomeScreen extends StatelessWidget {
                 color: const Color.fromRGBO(236, 236, 244, 0),
               ),
             ),
-            Center(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.only(bottom: 10, top: 10),
-                child: Column(
-                  children: const [
-                    ShoesTab(),
-                    SizedBox(height: 10),
-                    NewShoes(),
-                  ],
-                ),
+            SingleChildScrollView(
+              padding: const EdgeInsets.only(bottom: 10, top: 10),
+              child: Column(
+                children: const [
+                  ShoesTab(),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16,
+                    ),
+                    child: NewShoes(),
+                  ),
+                ],
               ),
             ),
           ],

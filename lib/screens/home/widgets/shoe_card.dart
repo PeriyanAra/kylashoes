@@ -14,6 +14,7 @@ class ShoeCard extends StatefulWidget {
   final bool isPrevious;
   final bool isCurrent;
   final bool isAbsoluteCurrent;
+  final bool isForward;
 
   const ShoeCard({
     super.key,
@@ -24,6 +25,7 @@ class ShoeCard extends StatefulWidget {
     required this.animation,
     required this.isCurrent,
     required this.isAbsoluteCurrent,
+    required this.isForward,
   });
 
   @override
@@ -36,19 +38,20 @@ class _ShoeCardState extends State<ShoeCard> {
 
   @override
   void initState() {
-    cardRotationAngle = widget.isCurrent ? -widget.angle : widget.angle;
     super.initState();
+
+    cardRotationAngle = widget.isCurrent ? -widget.angle : widget.angle;
   }
 
   @override
   void didUpdateWidget(covariant ShoeCard oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
     if (oldWidget.angle < widget.angle) {
       shoePosition = widget.angle * 300 - 21;
     }
 
     cardRotationAngle = widget.isCurrent ? -widget.angle : widget.angle;
+
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -58,7 +61,7 @@ class _ShoeCardState extends State<ShoeCard> {
 
     return GestureDetector(
       onTap: () {
-        context.router.push(
+        context.router.root.push(
           ItemInfoRoute(
             shoeViewModel: widget.shoeViewModel,
             imageHeroTag: imageHeroTag,
@@ -104,26 +107,31 @@ class _ShoeCardState extends State<ShoeCard> {
             ),
           ),
           Positioned(
-            right: widget.isAbsoluteCurrent
-                ? -21
-                : widget.isCurrent
-                    ? shoePosition
-                    : widget.isPrevious
+            right: widget.isForward
+                ? widget.isAbsoluteCurrent
+                    ? -21
+                    : widget.isCurrent
                         ? shoePosition
-                        : -21,
+                        : widget.isPrevious
+                            ? shoePosition
+                            : -21
+                : -21,
             top: 80,
-            child: Transform.rotate(
-              angle: !widget.isCurrent ? -widget.angle : 0,
-              alignment: const Alignment(0.5, -0.5),
-              child: Hero(
-                tag: imageHeroTag,
-                child: ImageShadow(
-                  offset: const Offset(14, 10),
-                  sigma: 20,
-                  opacity: 0.35,
-                  child: Image.asset(
-                    widget.shoeViewModel.imagePath,
-                    width: 250,
+            child: Opacity(
+              opacity: widget.isPrevious ? 0 : 1,
+              child: Transform.rotate(
+                angle: !widget.isCurrent ? -widget.angle : 0,
+                alignment: const Alignment(0.5, -0.5),
+                child: Hero(
+                  tag: imageHeroTag,
+                  child: ImageShadow(
+                    offset: const Offset(14, 10),
+                    sigma: 20,
+                    opacity: 0.35,
+                    child: Image.asset(
+                      widget.shoeViewModel.imagePath,
+                      width: 250,
+                    ),
                   ),
                 ),
               ),

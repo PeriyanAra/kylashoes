@@ -22,6 +22,7 @@ class ShoesListState extends State<ShoesList>
 
   double? pageOffset = 0;
   bool animationStarted = false;
+  bool isForward = true;
 
   @override
   void initState() {
@@ -38,6 +39,12 @@ class ShoesListState extends State<ShoesList>
     )..addListener(
         () {
           setState(() {
+            if (pageOffset! < pageController!.page!) {
+              isForward = true;
+            } else {
+              isForward = false;
+            }
+
             if (pageOffset!.floor() < pageController!.page!.floor()) {
               isLeftPaddingAnimationStarted = false;
             }
@@ -101,6 +108,7 @@ class ShoesListState extends State<ShoesList>
             isPrevious: index == pageOffset!.floor() - 1,
             isCurrent: index == pageOffset?.floor(),
             isAbsoluteCurrent: index == pageOffset,
+            isForward: isForward,
             angle: angle,
             scale: scale,
           );
@@ -182,7 +190,7 @@ final shoesViewModels = [
     id: 1,
     imagePath: 'assets/images/sneaker_02.png',
     model: 'Air-270',
-    price: 130,
+    price: 120,
     isFavorite: false,
     producer: 'Nike',
     backgroundColor: const Color.fromRGBO(173, 163, 231, 1),
@@ -191,7 +199,7 @@ final shoesViewModels = [
     id: 2,
     imagePath: 'assets/images/sneaker_03.png',
     model: 'Epic-react',
-    price: 130,
+    price: 150,
     isFavorite: false,
     producer: 'Nike',
     backgroundColor: const Color.fromRGBO(37, 114, 168, 1),

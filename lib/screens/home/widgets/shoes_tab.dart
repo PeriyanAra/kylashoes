@@ -57,6 +57,11 @@ class _ShoesTabState extends State<ShoesTab>
                           angle: -pi * 0.5,
                           child: Text(
                             _shoesTypeTabs[index],
+                            style: TextStyle(
+                              color:
+                                  index == 1 ? Colors.black : Colors.grey[400],
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       );

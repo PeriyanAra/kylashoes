@@ -15,6 +15,11 @@ part 'app_router.gr.dart';
   replaceInRouteName: 'Screen,Route',
   routes: <AutoRoute>[
     AutoRoute(
+      path: 'item_info',
+      page: ItemInfoScreen,
+      fullscreenDialog: true,
+    ),
+    AutoRoute(
       path: 'tabs',
       page: AppRouterScreen,
       initial: true,
@@ -27,10 +32,6 @@ part 'app_router.gr.dart';
             AutoRoute(
               path: '',
               page: HomeScreen,
-            ),
-              AutoRoute(
-              path: '',
-              page: ItemInfoScreen,
             ),
           ],
         ),

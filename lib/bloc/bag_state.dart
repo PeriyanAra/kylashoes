@@ -1,7 +1,9 @@
 part of 'bag_bloc.dart';
 
 class BagState {
-  final Map<ShoeViewModel, int> shoeViewModels;
+  final BagViewModel bagViewModel;
 
-  BagState({required this.shoeViewModels});
+  BagState({
+    required this.bagViewModel,
+  });
 }

@@ -9,7 +9,7 @@ class ComponentAddSnackBar {
       SnackBar(
         backgroundColor: backgroundColor,
         content: SizedBox(
-          height: 20,
+          height: 50,
           child: Container(
             alignment: Alignment.bottomCenter,
             child: const Text(
