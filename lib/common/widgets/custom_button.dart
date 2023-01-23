@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
+  final void Function() onTap;
+  final Decoration? decoration;
+  final AlignmentGeometry alignment;
+  final double? height;
+  final double? width;
+  final EdgeInsetsGeometry? padding;
+  final Color? color;
+  final Widget? child;
+
   const CustomButton({
     super.key,
     required this.onTap,
@@ -12,15 +21,6 @@ class CustomButton extends StatelessWidget {
     this.color,
     this.child,
   });
-
-  final void Function() onTap;
-  final Decoration? decoration;
-  final AlignmentGeometry alignment;
-  final double? height;
-  final double? width;
-  final EdgeInsetsGeometry? padding;
-  final Color? color;
-  final Widget? child;
 
   @override
   Widget build(BuildContext context) {

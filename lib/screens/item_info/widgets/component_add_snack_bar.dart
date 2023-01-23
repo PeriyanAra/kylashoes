@@ -1,6 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:kylashoes/common/widgets/custom_button.dart';
-import 'package:kylashoes/screens/bag/bag_screen.dart';
+import 'package:kylashoes/router/app_router.dart';
 
 class ComponentAddSnackBar {
   ComponentAddSnackBar.show(
@@ -11,7 +12,7 @@ class ComponentAddSnackBar {
       SnackBar(
         backgroundColor: backgroundColor,
         content: SizedBox(
-          height: 20,
+          height: 50,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -22,23 +23,37 @@ class ComponentAddSnackBar {
                 ),
               ),
               const Spacer(),
-              const Text(
-                'go to bag',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
               CustomButton(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const BagScreen(),
+                  context.router.navigate(
+                    const AppRouterRoute(
+                      children: [
+                        StoreTabRouter(
+                          children: [
+                            BagRoute(),
+                          ],
+                        ),
+                      ],
                     ),
                   );
+
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
                 },
-                child: const Icon(Icons.arrow_right_outlined),
-              )
+                child: Row(
+                  children: const [
+                    Text(
+                      'Go to bag',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_right_alt_rounded,
+                      color: Color.fromRGBO(255, 255, 255, 1),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

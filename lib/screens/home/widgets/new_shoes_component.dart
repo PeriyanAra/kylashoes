@@ -5,12 +5,14 @@ import 'package:kylashoes/common/widgets/favorite_button.dart';
 import 'package:kylashoes/view_models/shoe_view_model.dart';
 
 class NewShoesComponent extends StatefulWidget {
+  final ShoeViewModel shoe;
+  final EdgeInsetsGeometry? margin;
+
   const NewShoesComponent({
     super.key,
     required this.shoe,
+    this.margin,
   });
-
-  final ShoeViewModel shoe;
 
   @override
   State<NewShoesComponent> createState() => _NewShoesComponentState();
@@ -28,6 +30,7 @@ class _NewShoesComponentState extends State<NewShoesComponent> {
         right: 6,
         bottom: 14,
       ),
+      margin: widget.margin,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -40,11 +43,22 @@ class _NewShoesComponentState extends State<NewShoesComponent> {
           ),
         ],
       ),
-      height: 240,
-      width: MediaQuery.of(context).size.width / 2 - 15,
+      height: 210,
       child: Stack(
         children: [
-          Image.asset(widget.shoe.imagePath),
+          Center(
+            child: Column(
+              children: [
+                Image.asset(
+                  widget.shoe.imagePath,
+                  width: 150,
+                ),
+                const SizedBox(
+                  height: 20,
+                )
+              ],
+            ),
+          ),
           Center(
             child: Column(
               children: [
@@ -81,7 +95,7 @@ class _NewShoesComponentState extends State<NewShoesComponent> {
                   ),
                 ),
                 const SizedBox(height: 9),
-                Text('\$${widget.shoe.price}')
+                Text('\$${widget.shoe.price}0')
               ],
             ),
           ),

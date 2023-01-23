@@ -61,7 +61,7 @@ class _ShoeCardState extends State<ShoeCard> {
 
     return GestureDetector(
       onTap: () {
-        context.router.push(
+        context.router.root.push(
           ItemInfoRoute(
             shoeViewModel: widget.shoeViewModel,
             imageHeroTag: imageHeroTag,
@@ -149,9 +149,6 @@ class _ShoeCardState extends State<ShoeCard> {
                 passiveColor: const Color.fromRGBO(255, 255, 255, 1),
               ),
             ),
-          ),
-          Text(
-            '${widget.shoeViewModel.id}',
           ),
         ],
       ),

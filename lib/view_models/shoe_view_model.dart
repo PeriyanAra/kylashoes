@@ -12,10 +12,10 @@ class ShoeViewModel {
   });
 
   final int id;
-  String imagePath;
-  String model;
-  double price;
-  bool isFavorite;
-  String producer;
-  Color backgroundColor;
+  final String imagePath;
+  final String model;
+  final double price;
+  final bool isFavorite;
+  final String producer;
+  final Color backgroundColor;
 }

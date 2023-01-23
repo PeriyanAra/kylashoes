@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:kylashoes/common/widgets/custom_button.dart';
+import 'package:kylashoes/common/widgets/custom_animated_button.dart';
 
 class BagBottomStatusBar extends StatelessWidget {
-  const BagBottomStatusBar({super.key});
+  final double totalPrice;
+
+  const BagBottomStatusBar({
+    super.key,
+    required this.totalPrice,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,33 +28,24 @@ class BagBottomStatusBar extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
-              children: const [
-                Text(
+              children: [
+                const Text(
                   'TOTAL',
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ),
                 Text(
-                  '\$510.40',
-                  style: TextStyle(
+                  '\$${totalPrice}0',
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
-            CustomButton(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.pink,
-              ),
-              height: 40,
-              width: MediaQuery.of(context).size.width - 60,
+            CustomAnimatedButton(
+              text: 'NEXT',
               onTap: () {},
-              child: const Text(
-                'Next',
-                style: TextStyle(color: Colors.white),
-              ),
-            )
+            ),
           ],
         ),
       ),

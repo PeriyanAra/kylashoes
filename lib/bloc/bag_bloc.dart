@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kylashoes/view_models/bag_view_model.dart';
 import 'package:kylashoes/view_models/shoe_view_model.dart';
 
 part 'bag_event.dart';
@@ -9,7 +10,11 @@ class BagBloc extends Bloc<BagEvent, BagState> {
   BagBloc()
       : super(
           BagState(
-            shoeViewModels: {},
+            bagViewModel: BagViewModel(
+              shoeViewModels: {},
+              totalItems: 0,
+              totalPrice: 0,
+            ),
           ),
         ) {
     on<AddShoes>(_handleAddShoes);
@@ -20,37 +25,91 @@ class BagBloc extends Bloc<BagEvent, BagState> {
     AddShoes event,
     Emitter<BagState> emit,
   ) async {
-    Map<ShoeViewModel, int> newShoeViewModels = {...state.shoeViewModels};
+    Map<int, Map<String, Object>> newShoeViewModels = {
+      ...state.bagViewModel.shoeViewModels
+    };
 
-    if (newShoeViewModels[event.shoeViewModel] == null) {
-      newShoeViewModels[event.shoeViewModel] = 1;
+    if (newShoeViewModels[event.shoeViewModel.id] == null) {
+      newShoeViewModels[event.shoeViewModel.id] = {
+        'count': 1,
+        'viewModel': event.shoeViewModel,
+      };
     } else {
-      newShoeViewModels[event.shoeViewModel] =
-          newShoeViewModels[event.shoeViewModel]! + 1;
+      final count = newShoeViewModels[event.shoeViewModel.id]!['count']! as int;
+
+      newShoeViewModels[event.shoeViewModel.id] = {
+        'count': count + 1,
+        'viewModel': event.shoeViewModel,
+      };
     }
 
     emit(
       BagState(
-        shoeViewModels: newShoeViewModels,
+        bagViewModel: BagViewModel(
+          shoeViewModels: newShoeViewModels,
+          totalItems: _getTotalItemCount(newShoeViewModels),
+          totalPrice: _getTotalPrice(newShoeViewModels),
+        ),
       ),
     );
+  }
+
+  int _getTotalItemCount(
+    Map<int, Map<String, Object>> shoeViewModels,
+  ) {
+    int totalItemCount = 0;
+
+    shoeViewModels.forEach((key, value) {
+      final shoeCount = value['count'] as int;
+
+      totalItemCount += shoeCount;
+    });
+
+    return totalItemCount;
+  }
+
+  double _getTotalPrice(
+    Map<int, Map<String, Object>> shoeViewModels,
+  ) {
+    double totalPrice = 0;
+
+    shoeViewModels.forEach((key, value) {
+      final shoeViewModel = value['viewModel'] as ShoeViewModel;
+      final shoeCount = value['count'] as int;
+
+      totalPrice += shoeViewModel.price * shoeCount;
+    });
+
+    return totalPrice;
   }
 
   Future _handleDeleteShoesItem(
     DeleteShoesItem event,
     Emitter<BagState> emit,
   ) async {
-    Map<ShoeViewModel, int> newShoeViewModels = {...state.shoeViewModels};
+    Map<int, Map<String, Object>> newShoeViewModels = {
+      ...state.bagViewModel.shoeViewModels
+    };
 
-    if (newShoeViewModels[event.shoeViewModel] == 1) {
-      newShoeViewModels.remove(event.shoeViewModel);
+    final count = newShoeViewModels[event.shoeViewModel.id]!['count']! as int;
+
+    if (count == 1) {
+      newShoeViewModels.remove(event.shoeViewModel.id);
     } else {
-      newShoeViewModels[event.shoeViewModel] =
-          newShoeViewModels[event.shoeViewModel]! - 1;
+      newShoeViewModels[event.shoeViewModel.id] = {
+        'count': count - 1,
+        'viewModel': event.shoeViewModel,
+      };
     }
 
     emit(
-      BagState(shoeViewModels: newShoeViewModels),
+      BagState(
+        bagViewModel: BagViewModel(
+          shoeViewModels: newShoeViewModels,
+          totalItems: _getTotalItemCount(newShoeViewModels),
+          totalPrice: _getTotalPrice(newShoeViewModels),
+        ),
+      ),
     );
   }
 }

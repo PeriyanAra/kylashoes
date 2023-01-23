@@ -17,6 +17,19 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    ItemInfoRoute.name: (routeData) {
+      final args = routeData.argsAs<ItemInfoRouteArgs>();
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: ItemInfoScreen(
+          key: args.key,
+          shoeViewModel: args.shoeViewModel,
+          imageHeroTag: args.imageHeroTag,
+          backgroundHeroTag: args.backgroundHeroTag,
+        ),
+        fullscreenDialog: true,
+      );
+    },
     AppRouterRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
@@ -53,18 +66,6 @@ class _$AppRouter extends RootStackRouter {
         child: const HomeScreen(),
       );
     },
-    ItemInfoRoute.name: (routeData) {
-      final args = routeData.argsAs<ItemInfoRouteArgs>();
-      return MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: ItemInfoScreen(
-          key: args.key,
-          shoeViewModel: args.shoeViewModel,
-          imageHeroTag: args.imageHeroTag,
-          backgroundHeroTag: args.backgroundHeroTag,
-        ),
-      );
-    },
     FavoriteRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
@@ -94,6 +95,10 @@ class _$AppRouter extends RootStackRouter {
           fullMatch: true,
         ),
         RouteConfig(
+          ItemInfoRoute.name,
+          path: 'item_info',
+        ),
+        RouteConfig(
           AppRouterRoute.name,
           path: 'tabs',
           children: [
@@ -106,12 +111,7 @@ class _$AppRouter extends RootStackRouter {
                   HomeRoute.name,
                   path: '',
                   parent: HomeTabRouter.name,
-                ),
-                RouteConfig(
-                  ItemInfoRoute.name,
-                  path: '',
-                  parent: HomeTabRouter.name,
-                ),
+                )
               ],
             ),
             RouteConfig(
@@ -153,6 +153,50 @@ class _$AppRouter extends RootStackRouter {
           ],
         ),
       ];
+}
+
+/// generated route for
+/// [ItemInfoScreen]
+class ItemInfoRoute extends PageRouteInfo<ItemInfoRouteArgs> {
+  ItemInfoRoute({
+    Key? key,
+    required ShoeViewModel shoeViewModel,
+    required String imageHeroTag,
+    required String backgroundHeroTag,
+  }) : super(
+          ItemInfoRoute.name,
+          path: 'item_info',
+          args: ItemInfoRouteArgs(
+            key: key,
+            shoeViewModel: shoeViewModel,
+            imageHeroTag: imageHeroTag,
+            backgroundHeroTag: backgroundHeroTag,
+          ),
+        );
+
+  static const String name = 'ItemInfoRoute';
+}
+
+class ItemInfoRouteArgs {
+  const ItemInfoRouteArgs({
+    this.key,
+    required this.shoeViewModel,
+    required this.imageHeroTag,
+    required this.backgroundHeroTag,
+  });
+
+  final Key? key;
+
+  final ShoeViewModel shoeViewModel;
+
+  final String imageHeroTag;
+
+  final String backgroundHeroTag;
+
+  @override
+  String toString() {
+    return 'ItemInfoRouteArgs{key: $key, shoeViewModel: $shoeViewModel, imageHeroTag: $imageHeroTag, backgroundHeroTag: $backgroundHeroTag}';
+  }
 }
 
 /// generated route for
@@ -230,50 +274,6 @@ class HomeRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'HomeRoute';
-}
-
-/// generated route for
-/// [ItemInfoScreen]
-class ItemInfoRoute extends PageRouteInfo<ItemInfoRouteArgs> {
-  ItemInfoRoute({
-    Key? key,
-    required ShoeViewModel shoeViewModel,
-    required String imageHeroTag,
-    required String backgroundHeroTag,
-  }) : super(
-          ItemInfoRoute.name,
-          path: '',
-          args: ItemInfoRouteArgs(
-            key: key,
-            shoeViewModel: shoeViewModel,
-            imageHeroTag: imageHeroTag,
-            backgroundHeroTag: backgroundHeroTag,
-          ),
-        );
-
-  static const String name = 'ItemInfoRoute';
-}
-
-class ItemInfoRouteArgs {
-  const ItemInfoRouteArgs({
-    this.key,
-    required this.shoeViewModel,
-    required this.imageHeroTag,
-    required this.backgroundHeroTag,
-  });
-
-  final Key? key;
-
-  final ShoeViewModel shoeViewModel;
-
-  final String imageHeroTag;
-
-  final String backgroundHeroTag;
-
-  @override
-  String toString() {
-    return 'ItemInfoRouteArgs{key: $key, shoeViewModel: $shoeViewModel, imageHeroTag: $imageHeroTag, backgroundHeroTag: $backgroundHeroTag}';
-  }
 }
 
 /// generated route for

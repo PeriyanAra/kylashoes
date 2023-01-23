@@ -31,16 +31,6 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton> {
         });
         widget.onTap();
       },
-      onTapDown: (TapDownDetails details) {
-        setState(() {
-          isPressed = true;
-        });
-      },
-      onTapUp: (TapUpDetails details) {
-        setState(() {
-          isPressed = false;
-        });
-      },
       child: AnimatedContainer(
         height: isPressed ? 45 : 50,
         duration: const Duration(milliseconds: 100),

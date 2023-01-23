@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kylashoes/bloc/bag_bloc.dart';
-import 'package:kylashoes/common/custom_animated_button.dart';
+import 'package:kylashoes/common/widgets/custom_animated_button.dart';
 import 'package:kylashoes/screens/item_info/widgets/shoe_description_text.dart';
 import 'package:kylashoes/screens/item_info/widgets/shoe_name_and_price.dart';
 import 'package:kylashoes/screens/item_info/widgets/shoe_size_country.dart';

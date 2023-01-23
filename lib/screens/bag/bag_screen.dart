@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kylashoes/bloc/bag_bloc.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_app_bar.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_bottom_status_bar.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_shoes_component.dart';
+import 'package:kylashoes/view_models/shoe_view_model.dart';
 
 class BagScreen extends StatelessWidget {
   const BagScreen({
@@ -18,10 +21,10 @@ class BagScreen extends StatelessWidget {
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(kToolbarHeight + 30),
             child: BagAppBar(
-              itemsCount: state.shoeViewModels.length,
+              itemsCount: state.bagViewModel.totalItems,
             ),
           ),
-          body: state.shoeViewModels.isEmpty
+          body: state.bagViewModel.shoeViewModels.isEmpty
               ? const Center(
                   child: Text('No items in bag'),
                 )
@@ -36,12 +39,17 @@ class BagScreen extends StatelessWidget {
                         Expanded(
                           child: ListView.builder(
                             physics: const BouncingScrollPhysics(),
-                            itemCount: state.shoeViewModels.length,
+                            itemCount: state.bagViewModel.shoeViewModels.length,
                             itemBuilder: (context, index) {
                               final currentShoe =
-                                  state.shoeViewModels.keys.toList()[index];
-                              final count =
-                                  state.shoeViewModels[currentShoe] as int;
+                                  state.bagViewModel.shoeViewModels[index]
+                                      ?['viewModel'] as ShoeViewModel;
+                              final count = state.bagViewModel
+                                  .shoeViewModels[index]?['count'] as int;
+                              log(
+                                count.toString(),
+                                name: 'count',
+                              );
 
                               return Center(
                                 child: Padding(
@@ -56,7 +64,9 @@ class BagScreen extends StatelessWidget {
                             },
                           ),
                         ),
-                        const BagBottomStatusBar()
+                        BagBottomStatusBar(
+                          totalPrice: state.bagViewModel.totalPrice,
+                        )
                       ],
                     ),
                   ),

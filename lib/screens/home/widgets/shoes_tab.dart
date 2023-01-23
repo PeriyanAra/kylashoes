@@ -58,7 +58,9 @@ class _ShoesTabState extends State<ShoesTab>
                           child: Text(
                             _shoesTypeTabs[index],
                             style: TextStyle(
-                              fontWeight: index == 1 ? FontWeight.bold : null,
+                              color:
+                                  index == 1 ? Colors.black : Colors.grey[400],
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),

@@ -60,6 +60,13 @@ class _BagShoesComponentState extends State<BagShoesComponent>
   }
 
   @override
+  void didUpdateWidget(covariant BagShoesComponent oldWidget) {
+    _localComponentCount = widget.count;
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width - 40,
@@ -100,9 +107,9 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                             : _animation.value + 1,
                         duration: const Duration(milliseconds: 500),
                         child: ImageShadow(
-                          offset: const Offset(14, 10),
+                          offset: const Offset(6, 20),
                           sigma: 20,
-                          opacity: 0.35,
+                          opacity: 0.4,
                           child: Image.asset(
                             widget.shoe.imagePath,
                           ),
@@ -133,7 +140,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                   BagShoesValue(
                     isRemove: _localComponentCount == 0,
                     child: Text(
-                      "\$${widget.shoe.price}",
+                      "\$${widget.shoe.price}0",
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,

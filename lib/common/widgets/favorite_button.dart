@@ -35,16 +35,6 @@ class _FavoriteButtonState extends State<FavoriteButton> {
         });
         widget.onTap();
       },
-      onTapDown: (TapDownDetails details) {
-        setState(() {
-          isPressed = true;
-        });
-      },
-      onTapUp: (TapUpDetails details) {
-        setState(() {
-          isPressed = false;
-        });
-      },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 100),
         transformAlignment: Alignment.center,
