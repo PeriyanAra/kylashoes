@@ -35,8 +35,9 @@ class BagScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
                             itemCount: state.shoeViewModels.length,
-                            itemBuilder: (BuildContext context, int index) {
+                            itemBuilder: (context, index) {
                               final currentShoe =
                                   state.shoeViewModels.keys.toList()[index];
                               final count =
