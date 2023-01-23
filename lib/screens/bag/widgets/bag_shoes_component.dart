@@ -133,7 +133,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                   BagShoesValue(
                     isRemove: _localComponentCount == 0,
                     child: Text(
-                      widget.shoe.price.toString(),
+                      "\$${widget.shoe.price}",
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
