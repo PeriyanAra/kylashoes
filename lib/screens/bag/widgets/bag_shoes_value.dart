@@ -18,15 +18,20 @@ class _BagShoesValueState extends State<BagShoesValue>
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 800),
+      duration: const Duration(milliseconds: 600),
     );
 
     _animation = Tween<Offset>(
-      begin: const Offset(50, 0),
+      begin: const Offset(10, 0),
       end: Offset.zero,
-    ).animate(_animationController);
+    ).animate(_animationController)
+      ..addListener(
+        () {
+          setState(() {});
+        },
+      );
 
-    _animationController.forward();
+    _animationController.fling();
 
     super.initState();
   }
