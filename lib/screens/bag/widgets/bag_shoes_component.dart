@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:kylashoes/common/widgets/image_shadow.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_shoes_quantity.dart';
@@ -25,12 +27,9 @@ class _BagShoesComponentState extends State<BagShoesComponent>
   late AnimationController _animationController;
   late Animation<double> _animation;
   late AnimationStatus _animationStatus;
-  int _localComponentCount = 0;
 
   @override
   void initState() {
-    _localComponentCount = widget.count;
-
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(
@@ -122,7 +121,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   BagShoesValue(
-                    isRemove: _localComponentCount == 0,
+                    removable: _animationStatus == AnimationStatus.reverse,
                     child: Text(
                       widget.shoe.model,
                       style: const TextStyle(
@@ -131,7 +130,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                     ),
                   ),
                   BagShoesValue(
-                    isRemove: _localComponentCount == 0,
+                    removable: _animationStatus == AnimationStatus.reverse,
                     child: Text(
                       "\$${widget.shoe.price}",
                       style: const TextStyle(
@@ -141,19 +140,15 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                     ),
                   ),
                   BagShoesValue(
-                    isRemove: _localComponentCount == 0,
+                    removable: _animationStatus == AnimationStatus.reverse,
                     child: BagShoesQuantity(
-                      quantity: _localComponentCount,
+                      quantity: widget.count,
                       onMinusPressed: () {
-                        _localComponentCount--;
-
                         _onMinusPressed(
                           context.read<BagBloc>(),
                         );
                       },
                       onPlusPressed: () {
-                        _localComponentCount++;
-
                         context.read<BagBloc>().add(
                               AddShoes(
                                 shoeViewModel: widget.shoe,
@@ -172,7 +167,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
   }
 
   Future<void> _onMinusPressed(BagBloc shoeBloc) async {
-    if (_localComponentCount == 0) {
+    if (widget.count == 1) {
       _animationController.reverse();
 
       await Future.delayed(
