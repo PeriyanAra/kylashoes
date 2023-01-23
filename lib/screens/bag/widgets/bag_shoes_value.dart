@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class BagShoesValue extends StatefulWidget {
   const BagShoesValue({
     this.child,
-    required this.removable,
+    required this.isRemoved,
     super.key,
   });
 
   final Widget? child;
-  final bool removable;
+  final bool isRemoved;
 
   @override
   State<BagShoesValue> createState() => _BagShoesValueState();
@@ -52,7 +52,7 @@ class _BagShoesValueState extends State<BagShoesValue>
   }
 
   void _reverseAnimation() {
-    if (widget.removable) {
+    if (widget.isRemoved) {
       _animationController.reverse();
     }
   }
