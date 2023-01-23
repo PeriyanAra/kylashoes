@@ -1,26 +1,48 @@
 import 'package:flutter/material.dart';
 
 class RoundedImageContainer extends StatelessWidget {
-  const RoundedImageContainer({super.key, required this.imageUrl});
-
   final String imageUrl;
+  final bool isVideo;
+  final EdgeInsetsGeometry? margin;
+
+  const RoundedImageContainer({
+    required this.imageUrl,
+    this.isVideo = false,
+    this.margin,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: Container(
-        padding: const EdgeInsets.all(2),
-        width: 85,
-        height: 65,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: const Color.fromARGB(255, 245, 243, 244),
-        ),
-        child: Image(
+    return Container(
+      width: 90,
+      height: 65,
+      margin: margin,
+      decoration: BoxDecoration(
+        color: isVideo
+            ? const Color.fromRGBO(188, 188, 188, 1)
+            : const Color.fromRGBO(245, 245, 245, 1),
+        image: DecorationImage(
           image: AssetImage(imageUrl),
+          fit: BoxFit.cover,
+          colorFilter: isVideo
+              ? ColorFilter.mode(
+                  const Color.fromARGB(255, 200, 197, 197).withOpacity(1),
+                  BlendMode.darken,
+                )
+              : null,
         ),
+        borderRadius: BorderRadius.circular(10),
       ),
+      child: isVideo
+          ? const Center(
+              child: Icon(
+                Icons.play_circle_fill_rounded,
+                color: Colors.white,
+                size: 30,
+              ),
+            )
+          : null,
     );
   }
 }

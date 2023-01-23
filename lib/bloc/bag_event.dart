@@ -1,15 +1,15 @@
-part of 'shoe_bloc.dart';
+part of 'bag_bloc.dart';
 
 @immutable
-abstract class ShoeEvent {}
+abstract class BagEvent {}
 
-class AddShoes extends ShoeEvent {
+class AddShoes extends BagEvent {
   final ShoeViewModel shoeViewModel;
 
   AddShoes({required this.shoeViewModel});
 }
 
-class DeleteShoesItem extends ShoeEvent {
+class DeleteShoesItem extends BagEvent {
   final ShoeViewModel shoeViewModel;
 
   DeleteShoesItem({required this.shoeViewModel});

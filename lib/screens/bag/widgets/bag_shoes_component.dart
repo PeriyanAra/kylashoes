@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kylashoes/bloc/shoe_bloc.dart';
+import 'package:kylashoes/bloc/bag_bloc.dart';
 import 'package:kylashoes/common/widgets/custom_button.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_shoes_value.dart';
 import 'package:kylashoes/view_models/shoe_view_model.dart';
@@ -165,7 +165,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
   }
 
   void _handleRemove(BuildContext context) {
-    context.read<ShoeBloc>().add(DeleteShoesItem(
+    context.read<BagBloc>().add(DeleteShoesItem(
           shoeViewModel: widget.shoe,
         ));
   }

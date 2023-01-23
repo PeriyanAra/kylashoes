@@ -2,13 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kylashoes/view_models/shoe_view_model.dart';
 
-part 'shoe_event.dart';
-part 'shoe_state.dart';
+part 'bag_event.dart';
+part 'bag_state.dart';
 
-class ShoeBloc extends Bloc<ShoeEvent, ShoeState> {
-  ShoeBloc()
+class BagBloc extends Bloc<BagEvent, BagState> {
+  BagBloc()
       : super(
-          ShoeState(
+          BagState(
             shoeViewModels: {},
           ),
         ) {
@@ -18,7 +18,7 @@ class ShoeBloc extends Bloc<ShoeEvent, ShoeState> {
 
   Future _handleAddShoes(
     AddShoes event,
-    Emitter<ShoeState> emit,
+    Emitter<BagState> emit,
   ) async {
     Map<ShoeViewModel, int> newShoeViewModels = {...state.shoeViewModels};
 
@@ -30,7 +30,7 @@ class ShoeBloc extends Bloc<ShoeEvent, ShoeState> {
     }
 
     emit(
-      ShoeState(
+      BagState(
         shoeViewModels: newShoeViewModels,
       ),
     );
@@ -38,7 +38,7 @@ class ShoeBloc extends Bloc<ShoeEvent, ShoeState> {
 
   Future _handleDeleteShoesItem(
     DeleteShoesItem event,
-    Emitter<ShoeState> emit,
+    Emitter<BagState> emit,
   ) async {
     Map<ShoeViewModel, int> newShoeViewModels = {...state.shoeViewModels};
 
@@ -50,7 +50,7 @@ class ShoeBloc extends Bloc<ShoeEvent, ShoeState> {
     }
 
     emit(
-      ShoeState(shoeViewModels: newShoeViewModels),
+      BagState(shoeViewModels: newShoeViewModels),
     );
   }
 }

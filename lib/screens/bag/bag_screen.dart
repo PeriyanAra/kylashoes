@@ -1,8 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kylashoes/bloc/shoe_bloc.dart';
+import 'package:kylashoes/bloc/bag_bloc.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_app_bar.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_shoes_component.dart';
 
@@ -13,7 +11,7 @@ class BagScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ShoeBloc, ShoeState>(
+    return BlocBuilder<BagBloc, BagState>(
       builder: (context, state) {
         return Scaffold(
           appBar: PreferredSize(

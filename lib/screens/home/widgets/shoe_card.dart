@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kylashoes/common/widgets/favorite_button.dart';
 import 'package:kylashoes/common/widgets/image_shadow.dart';
 import 'package:kylashoes/screens/home/widgets/shoe_card_main_info.dart';
 import 'package:kylashoes/screens/item_info/item_info_screen.dart';
@@ -126,6 +127,19 @@ class _ShoeCardState extends State<ShoeCard> {
                     width: 250,
                   ),
                 ),
+              ),
+            ),
+          ),
+          Positioned(
+            right: 32,
+            top: 70,
+            child: AnimatedOpacity(
+              opacity: widget.isAbsoluteCurrent ? 1 : 0,
+              duration: const Duration(milliseconds: 300),
+              child: FavoriteButton(
+                onTap: () {},
+                activeColor: const Color.fromRGBO(255, 255, 255, 1),
+                passiveColor: const Color.fromRGBO(255, 255, 255, 1),
               ),
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kylashoes/common/widgets/custom_button.dart';
+import 'package:kylashoes/common/widgets/favorite_button.dart';
 
 class ItemInfoScreenAppBar extends StatelessWidget {
   final Color backgroundColor;
@@ -13,33 +14,37 @@ class ItemInfoScreenAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.transparent,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 25, left: 15, right: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CustomButton(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: const Icon(
-                Icons.arrow_back_outlined,
-                color: Colors.white,
+    return SafeArea(
+      child: Container(
+        color: Colors.transparent,
+        width: MediaQuery.of(context).size.width,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            left: 15,
+            right: 15,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomButton(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Icon(
+                  Icons.keyboard_backspace_rounded,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            Text(
-              itemName,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+              Text(
+                itemName,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            CustomButton(
-              onTap: () { },
-              child: Container(
+              Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   boxShadow: const [
@@ -57,13 +62,14 @@ class ItemInfoScreenAppBar extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: Colors.white.withOpacity(0.3),
                 ),
-                child: const Icon(
-                  Icons.favorite_border,
-                  color: Colors.white,
+                child: FavoriteButton(
+                  onTap: () {},
+                  activeColor: const Color.fromRGBO(255, 255, 255, 1),
+                  passiveColor: const Color.fromRGBO(255, 255, 255, 1),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
