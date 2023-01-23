@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height / 5,
-                color: Colors.grey[300],
+                color: const Color.fromRGBO(236, 236, 244, 0),
               ),
             ),
             Center(

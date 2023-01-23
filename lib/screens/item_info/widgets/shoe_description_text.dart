@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class BootsDescriptionText extends StatelessWidget {
-  const BootsDescriptionText({Key? key}) : super(key: key);
+class ShoeDescriptionText extends StatelessWidget {
+  const ShoeDescriptionText({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +14,17 @@ class BootsDescriptionText extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Container(
-            width: 140,
             margin: const EdgeInsets.symmetric(vertical: 20),
             decoration: const BoxDecoration(
               border: Border(bottom: BorderSide(color: Colors.black)),
             ),
             child: const Text(
-              'M O R E  D E T A I L S',
+              'MORE DETAILS',
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
-                fontSize: 13,
+                fontSize: 12,
+                letterSpacing: 2,
               ),
             ),
           ),

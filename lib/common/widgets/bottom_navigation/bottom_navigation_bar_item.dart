@@ -28,7 +28,7 @@ class CustomBottomNavigationBarItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: Icon(
           icon,
-          color: isSelected ? Colors.pink : null,
+          color: isSelected ? const Color.fromRGBO(250, 43, 94, 1) : null,
         ),
       ),
     );

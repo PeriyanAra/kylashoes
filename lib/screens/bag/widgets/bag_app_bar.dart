@@ -17,7 +17,7 @@ class BagAppBar extends StatelessWidget {
       leading: CustomButton(
         onTap: () {},
         child: const Icon(
-          Icons.arrow_back_outlined,
+          Icons.keyboard_backspace_rounded,
           color: Colors.black,
         ),
       ),

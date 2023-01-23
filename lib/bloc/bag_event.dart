@@ -1,17 +1,17 @@
-part of 'shoe_bloc.dart';
+part of 'bag_bloc.dart';
 
 @immutable
-abstract class ShoeEvent {
-  const ShoeEvent();
+abstract class BagEvent {
+  const BagEvent();
 }
 
-class AddShoes extends ShoeEvent {
+class AddShoes extends BagEvent {
   final ShoeViewModel shoeViewModel;
 
   const AddShoes({required this.shoeViewModel});
 }
 
-class DeleteShoesItem extends ShoeEvent {
+class DeleteShoesItem extends BagEvent {
   final ShoeViewModel shoeViewModel;
 
   const DeleteShoesItem({required this.shoeViewModel});

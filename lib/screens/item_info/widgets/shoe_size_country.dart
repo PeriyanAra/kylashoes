@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class BootsSizeCountry extends StatelessWidget {
-  const BootsSizeCountry({Key? key}) : super(key: key);
+class ShoeSizeCountry extends StatelessWidget {
+  const ShoeSizeCountry({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

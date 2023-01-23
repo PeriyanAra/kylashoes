@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kylashoes/bloc/shoe_bloc.dart';
+import 'package:kylashoes/bloc/bag_bloc.dart';
 import 'package:kylashoes/common/custom_animated_button.dart';
-import 'package:kylashoes/screens/item_info/widgets/boots_description_text.dart';
-import 'package:kylashoes/screens/item_info/widgets/boots_name_and_price.dart';
-import 'package:kylashoes/screens/item_info/widgets/boots_size_country.dart';
-import 'package:kylashoes/screens/item_info/widgets/boots_size_list_view.dart';
+import 'package:kylashoes/screens/item_info/widgets/shoe_description_text.dart';
+import 'package:kylashoes/screens/item_info/widgets/shoe_name_and_price.dart';
+import 'package:kylashoes/screens/item_info/widgets/shoe_size_country.dart';
+import 'package:kylashoes/screens/item_info/widgets/shoe_size_list_view.dart';
 import 'package:kylashoes/screens/item_info/widgets/item_container.dart';
 import 'package:kylashoes/screens/item_info/widgets/item_info_screen_app_bar.dart';
 import 'package:kylashoes/screens/item_info/widgets/item_photo_horizontal_list.dart';
@@ -56,10 +56,6 @@ class _ItemInfoScreenState extends State<ItemInfoScreen> {
             SafeArea(
               child: ListView(
                 children: [
-                  ItemInfoScreenAppBar(
-                    itemName: widget.shoeViewModel.producer,
-                    backgroundColor: widget.shoeViewModel.backgroundColor,
-                  ),
                   ItemContainer(
                     imageUrl: widget.shoeViewModel.imagePath,
                     imageHeroTag: widget.imageHeroTag,
@@ -70,25 +66,42 @@ class _ItemInfoScreenState extends State<ItemInfoScreen> {
                   ItemPhotoHorizontalList(
                     imageUrl: [widget.shoeViewModel.imagePath],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        BootsNameAndPrice(
-                          price: widget.shoeViewModel.price,
-                          model: widget.shoeViewModel.model,
+                  const SizedBox(height: 16),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 1,
+                              color: const Color.fromRGBO(210, 210, 210, 1),
+                            ),
+                            const SizedBox(height: 20),
+                            ShoeNameAndPrice(
+                              price: widget.shoeViewModel.price,
+                              model: widget.shoeViewModel.model,
+                            ),
+                            const SizedBox(height: 20),
+                            const ShoeDescriptionText(),
+                            const ShoeSizeCountry(),
+                            const SizedBox(
+                              height: 12.0,
+                            ),
+                          ],
                         ),
-                        const BootsDescriptionText(),
-                        const BootsSizeCountry(),
-                        const SizedBox(
-                          height: 12.0,
-                        ),
-                        const BootsSizeListView(),
-                        CustomAnimatedButton(
+                      ),
+                      const ShoeSizeListView(),
+                      const SizedBox(height: 16),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: CustomAnimatedButton(
                           text: 'ADD TO BAG',
                           onTap: () {
-                            context.read<ShoeBloc>().add(
+                            context.read<BagBloc>().add(
                                   AddShoes(
                                     shoeViewModel: widget.shoeViewModel,
                                   ),
@@ -100,10 +113,18 @@ class _ItemInfoScreenState extends State<ItemInfoScreen> {
                             );
                           },
                         ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(height: 16),
+                    ],
                   ),
                 ],
+              ),
+            ),
+            Positioned(
+              top: 0,
+              child: ItemInfoScreenAppBar(
+                itemName: widget.shoeViewModel.producer,
+                backgroundColor: widget.shoeViewModel.backgroundColor,
               ),
             ),
           ],

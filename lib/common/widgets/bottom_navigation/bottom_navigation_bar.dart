@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'buttom_navigation_bar_item.dart';
+import 'bottom_navigation_bar_item.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   final int currentIndex;
@@ -20,22 +20,22 @@ class CustomBottomNavigationBar extends StatefulWidget {
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   var _items = <CustomBottomNavigationBarItem>[
     const CustomBottomNavigationBarItem(
-      icon: Icons.home,
+      icon: Icons.home_rounded,
       isSelected: true,
       lastTab: true,
     ),
     const CustomBottomNavigationBarItem(
-      icon: Icons.favorite,
+      icon: Icons.favorite_rounded,
       isSelected: true,
       lastTab: true,
     ),
     const CustomBottomNavigationBarItem(
-      icon: Icons.store_mall_directory_sharp,
+      icon: Icons.shopping_cart_rounded,
       isSelected: true,
       lastTab: true,
     ),
     const CustomBottomNavigationBarItem(
-      icon: Icons.person,
+      icon: Icons.person_rounded,
       isSelected: true,
       lastTab: true,
     ),
@@ -46,7 +46,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).padding.bottom + 40,
-      color: Colors.grey[300],
+      color: const Color.fromRGBO(236, 236, 244, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(

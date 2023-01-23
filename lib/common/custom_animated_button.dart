@@ -19,43 +19,54 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: InkWell(
-        borderRadius: const BorderRadius.all(
-          Radius.circular(8.0),
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isPressed = true;
+        });
+        Future.delayed(const Duration(milliseconds: 100), () {
+          setState(() {
+            isPressed = false;
+          });
+        });
+        widget.onTap();
+      },
+      onTapDown: (TapDownDetails details) {
+        setState(() {
+          isPressed = true;
+        });
+      },
+      onTapUp: (TapUpDetails details) {
+        setState(() {
+          isPressed = false;
+        });
+      },
+      child: AnimatedContainer(
+        height: isPressed ? 45 : 50,
+        duration: const Duration(milliseconds: 100),
+        padding: const EdgeInsets.all(12.0),
+        alignment: Alignment.center,
+        transform: Matrix4.identity()
+          ..scale(
+            isPressed ? 0.9 : 1.0,
+            isPressed ? 0.9 : 1.0,
+          ),
+        transformAlignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(8.0),
+          ),
+          color: isPressed
+              ? const Color.fromRGBO(250, 43, 94, 0.7)
+              : const Color.fromRGBO(250, 43, 94, 1),
         ),
-        onTapDown: (TapDownDetails details) {
-          setState(() {
-            isPressed = !isPressed;
-          });
-        },
-        onTapUp: (TapUpDetails details) {
-          setState(() {
-            isPressed = !isPressed;
-          });
-          widget.onTap();
-        },
-        child: AnimatedContainer(
-          width: isPressed
-              ? MediaQuery.of(context).size.width * 0.7
-              : MediaQuery.of(context).size.width * 0.8,
-          height: isPressed ? 45 : 50,
-          duration: const Duration(milliseconds: 100),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(
-              Radius.circular(8.0),
-            ),
-            color: isPressed
-                ? const Color.fromARGB(255, 249, 117, 187)
-                : const Color.fromRGBO(255, 20, 147, 1),
+        child: Text(
+          widget.text,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
           ),
-          child: Text(
-            widget.text,
-            style: const TextStyle(color: Colors.white),
-            textAlign: TextAlign.center,
-          ),
+          textAlign: TextAlign.center,
         ),
       ),
     );

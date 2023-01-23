@@ -15,30 +15,22 @@ class ShoeCardMainInfo extends StatelessWidget {
       width: 300,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(20),
+        ),
         color: shoeViewModel.backgroundColor,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                shoeViewModel.producer.toUpperCase(),
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
-                softWrap: false,
-              ),
-              const Icon(
-                Icons.favorite_border_rounded,
-                color: Colors.white,
-                size: 28,
-              ),
-            ],
+          Text(
+            shoeViewModel.producer.toUpperCase(),
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+              fontSize: 18,
+            ),
+            softWrap: false,
           ),
           Text(
             shoeViewModel.model.toUpperCase(),
@@ -65,7 +57,8 @@ class ShoeCardMainInfo extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: Icon(
               color: Colors.white,
-              Icons.arrow_forward_rounded,
+              Icons.arrow_right_alt_rounded,
+              size: 30,
             ),
           )
         ],

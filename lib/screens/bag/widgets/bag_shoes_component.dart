@@ -3,7 +3,7 @@ import 'package:kylashoes/common/widgets/image_shadow.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_shoes_quantity.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_shoes_value.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kylashoes/bloc/shoe_bloc.dart';
+import 'package:kylashoes/bloc/bag_bloc.dart';
 import 'package:kylashoes/view_models/shoe_view_model.dart';
 
 class BagShoesComponent extends StatefulWidget {
@@ -148,13 +148,13 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                         _localComponentCount--;
 
                         _onMinusPressed(
-                          context.read<ShoeBloc>(),
+                          context.read<BagBloc>(),
                         );
                       },
                       onPlusPressed: () {
                         _localComponentCount++;
 
-                        context.read<ShoeBloc>().add(
+                        context.read<BagBloc>().add(
                               AddShoes(
                                 shoeViewModel: widget.shoe,
                               ),
@@ -171,7 +171,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
     );
   }
 
-  Future<void> _onMinusPressed(ShoeBloc shoeBloc) async {
+  Future<void> _onMinusPressed(BagBloc shoeBloc) async {
     if (_localComponentCount == 0) {
       _animationController.reverse();
 
