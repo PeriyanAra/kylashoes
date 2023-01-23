@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class BagShoesValue extends StatefulWidget {
-  const BagShoesValue({super.key, this.child});
+  const BagShoesValue({
+    this.child,
+    required this.isRemove,
+    super.key,
+  });
 
   final Widget? child;
+  final bool isRemove;
 
   @override
   State<BagShoesValue> createState() => _BagShoesValueState();
@@ -38,10 +43,18 @@ class _BagShoesValueState extends State<BagShoesValue>
 
   @override
   Widget build(BuildContext context) {
+    _reverseAnimation();
+
     return SlideTransition(
       position: _animation,
       child: widget.child,
     );
+  }
+
+  void _reverseAnimation() {
+    if (widget.isRemove) {
+      _animationController.reverse();
+    }
   }
 
   @override

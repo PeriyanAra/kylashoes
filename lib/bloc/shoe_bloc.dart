@@ -8,7 +8,7 @@ part 'shoe_state.dart';
 class ShoeBloc extends Bloc<ShoeEvent, ShoeState> {
   ShoeBloc()
       : super(
-          ShoeState(
+          const ShoeState(
             shoeViewModels: {},
           ),
         ) {
