@@ -22,6 +22,7 @@ class ShoesListState extends State<ShoesList>
 
   double? pageOffset = 0;
   bool animationStarted = false;
+  bool isForward = true;
 
   @override
   void initState() {
@@ -38,6 +39,12 @@ class ShoesListState extends State<ShoesList>
     )..addListener(
         () {
           setState(() {
+            if (pageOffset! < pageController!.page!) {
+              isForward = true;
+            } else {
+              isForward = false;
+            }
+
             if (pageOffset!.floor() < pageController!.page!.floor()) {
               isLeftPaddingAnimationStarted = false;
             }
@@ -101,6 +108,7 @@ class ShoesListState extends State<ShoesList>
             isPrevious: index == pageOffset!.floor() - 1,
             isCurrent: index == pageOffset?.floor(),
             isAbsoluteCurrent: index == pageOffset,
+            isForward: isForward,
             angle: angle,
             scale: scale,
           );
