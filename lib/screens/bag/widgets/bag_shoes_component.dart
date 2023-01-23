@@ -25,11 +25,11 @@ class _BagShoesComponentState extends State<BagShoesComponent>
   late AnimationController _animationController;
   late Animation<double> _animation;
   late AnimationStatus _animationStatus;
-  int _localComponentCount = 0;
+  late BagBloc _bloc;
 
   @override
   void initState() {
-    _localComponentCount = widget.count;
+    _bloc = context.read<BagBloc>();
 
     _animationController = AnimationController(
       vsync: this,
@@ -129,7 +129,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   BagShoesValue(
-                    isRemove: _localComponentCount == 0,
+                    isRemoved: _animationStatus == AnimationStatus.reverse,
                     child: Text(
                       widget.shoe.model,
                       style: const TextStyle(
@@ -138,7 +138,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                     ),
                   ),
                   BagShoesValue(
-                    isRemove: _localComponentCount == 0,
+                    isRemoved: _animationStatus == AnimationStatus.reverse,
                     child: Text(
                       "\$${widget.shoe.price}0",
                       style: const TextStyle(
@@ -148,24 +148,14 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                     ),
                   ),
                   BagShoesValue(
-                    isRemove: _localComponentCount == 0,
+                    isRemoved: _animationStatus == AnimationStatus.reverse,
                     child: BagShoesQuantity(
-                      quantity: _localComponentCount,
+                      quantity: widget.count,
                       onMinusPressed: () {
-                        _localComponentCount--;
-
-                        _onMinusPressed(
-                          context.read<BagBloc>(),
-                        );
+                        _onMinusPressed();
                       },
                       onPlusPressed: () {
-                        _localComponentCount++;
-
-                        context.read<BagBloc>().add(
-                              AddShoes(
-                                shoeViewModel: widget.shoe,
-                              ),
-                            );
+                        _onPlusPressed(context);
                       },
                     ),
                   ),
@@ -178,8 +168,16 @@ class _BagShoesComponentState extends State<BagShoesComponent>
     );
   }
 
-  Future<void> _onMinusPressed(BagBloc shoeBloc) async {
-    if (_localComponentCount == 0) {
+  void _onPlusPressed(BuildContext context) {
+    context.read<BagBloc>().add(
+          AddShoes(
+            shoeViewModel: widget.shoe,
+          ),
+        );
+  }
+
+  Future<void> _onMinusPressed() async {
+    if (widget.count == 1) {
       _animationController.reverse();
 
       await Future.delayed(
@@ -187,11 +185,11 @@ class _BagShoesComponentState extends State<BagShoesComponent>
       );
     }
 
-    shoeBloc.add(
-      DeleteShoesItem(
-        shoeViewModel: widget.shoe,
-      ),
-    );
+    _bloc.add(
+          DeleteShoesItem(
+            shoeViewModel: widget.shoe,
+          ),
+        );
   }
 
   @override
