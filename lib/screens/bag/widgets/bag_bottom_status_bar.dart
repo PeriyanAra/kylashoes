@@ -17,6 +17,14 @@ class BagBottomStatusBar extends StatelessWidget {
       ),
       height: 110,
       width: MediaQuery.of(context).size.width,
+      decoration: const BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            width: 1,
+            color: Color.fromARGB(255, 242, 242, 242),
+          ),
+        ),
+      ),
       child: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: 20,

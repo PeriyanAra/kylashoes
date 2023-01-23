@@ -75,10 +75,6 @@ class BagBloc extends Bloc<BagEvent, BagState> {
       };
     }
 
-    log(
-      newShoeViewModels.toString(),
-      name: 'newShoeViewModels',
-    );
     emit(
       BagState(
         bagViewModel: BagViewModel(

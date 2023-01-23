@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kylashoes/bloc/bag_bloc.dart';
@@ -53,7 +55,11 @@ class _BagScreenState extends State<BagScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BagBloc, BagState>(
+    return BlocConsumer<BagBloc, BagState>(
+      listenWhen: (previous, current) =>
+          current.bagViewModel.shoeViewModels.length >
+          previous.bagViewModel.shoeViewModels.length,
+      listener: (context, state) => _key.currentState?.insertItem(0),
       builder: (context, state) {
         return Scaffold(
           appBar: PreferredSize(
