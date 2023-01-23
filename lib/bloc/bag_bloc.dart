@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kylashoes/view_models/bag_view_model.dart';
@@ -54,6 +56,40 @@ class BagBloc extends Bloc<BagEvent, BagState> {
     );
   }
 
+  Future _handleDeleteShoesItem(
+    DeleteShoesItem event,
+    Emitter<BagState> emit,
+  ) async {
+    Map<int, Map<String, Object>> newShoeViewModels = {
+      ...state.bagViewModel.shoeViewModels
+    };
+
+    final count = newShoeViewModels[event.shoeViewModel.id]!['count']! as int;
+
+    if (count == 1) {
+      newShoeViewModels.remove(event.shoeViewModel.id);
+    } else {
+      newShoeViewModels[event.shoeViewModel.id] = {
+        'count': count - 1,
+        'viewModel': event.shoeViewModel,
+      };
+    }
+
+    log(
+      newShoeViewModels.toString(),
+      name: 'newShoeViewModels',
+    );
+    emit(
+      BagState(
+        bagViewModel: BagViewModel(
+          shoeViewModels: newShoeViewModels,
+          totalItems: _getTotalItemCount(newShoeViewModels),
+          totalPrice: _getTotalPrice(newShoeViewModels),
+        ),
+      ),
+    );
+  }
+
   int _getTotalItemCount(
     Map<int, Map<String, Object>> shoeViewModels,
   ) {
@@ -81,35 +117,5 @@ class BagBloc extends Bloc<BagEvent, BagState> {
     });
 
     return totalPrice;
-  }
-
-  Future _handleDeleteShoesItem(
-    DeleteShoesItem event,
-    Emitter<BagState> emit,
-  ) async {
-    Map<int, Map<String, Object>> newShoeViewModels = {
-      ...state.bagViewModel.shoeViewModels
-    };
-
-    final count = newShoeViewModels[event.shoeViewModel.id]!['count']! as int;
-
-    if (count == 1) {
-      newShoeViewModels.remove(event.shoeViewModel.id);
-    } else {
-      newShoeViewModels[event.shoeViewModel.id] = {
-        'count': count - 1,
-        'viewModel': event.shoeViewModel,
-      };
-    }
-
-    emit(
-      BagState(
-        bagViewModel: BagViewModel(
-          shoeViewModels: newShoeViewModels,
-          totalItems: _getTotalItemCount(newShoeViewModels),
-          totalPrice: _getTotalPrice(newShoeViewModels),
-        ),
-      ),
-    );
   }
 }

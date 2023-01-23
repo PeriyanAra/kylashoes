@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kylashoes/bloc/bag_bloc.dart';
@@ -8,10 +6,50 @@ import 'package:kylashoes/screens/bag/widgets/bag_bottom_status_bar.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_shoes_component.dart';
 import 'package:kylashoes/view_models/shoe_view_model.dart';
 
-class BagScreen extends StatelessWidget {
+class BagScreen extends StatefulWidget {
   const BagScreen({
     super.key,
   });
+
+  @override
+  State<BagScreen> createState() => _BagScreenState();
+}
+
+class _BagScreenState extends State<BagScreen> {
+  final GlobalKey<AnimatedListState> _key = GlobalKey();
+
+  void _onRemoveShoe(
+    int index,
+    BuildContext context,
+    ShoeViewModel currentShoe,
+    int count,
+  ) {
+    AnimatedList.of(context).removeItem(
+      index,
+      (context, animation) => FadeTransition(
+        opacity: animation,
+        child: SizeTransition(
+          key: UniqueKey(),
+          sizeFactor: animation,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 40),
+              child: BagShoesComponent(
+                shoe: currentShoe,
+                count: count,
+                onRemove: () => _onRemoveShoe(
+                  index,
+                  context,
+                  currentShoe,
+                  count,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,27 +75,43 @@ class BagScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: state.bagViewModel.shoeViewModels.length,
-                            itemBuilder: (context, index) {
-                              final currentShoe =
-                                  state.bagViewModel.shoeViewModels[index]
-                                      ?['viewModel'] as ShoeViewModel;
-                              final count = state.bagViewModel
-                                  .shoeViewModels[index]?['count'] as int;
-                              log(
-                                count.toString(),
-                                name: 'count',
-                              );
+                          child: AnimatedList(
+                            key: _key,
+                            initialItemCount:
+                                state.bagViewModel.shoeViewModels.length,
+                            itemBuilder: (context, index, animation) {
+                              final keys = state
+                                  .bagViewModel.shoeViewModels.keys
+                                  .toList();
 
-                              return Center(
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 40),
-                                  child: BagShoesComponent(
-                                    shoe: currentShoe,
-                                    count: count,
+                              final currentShoe =
+                                  state.bagViewModel.shoeViewModels[keys[index]]
+                                      ?['viewModel'] as ShoeViewModel;
+
+                              final count = state.bagViewModel
+                                  .shoeViewModels[keys[index]]?['count'] as int;
+
+                              return FadeTransition(
+                                opacity: animation,
+                                child: SizeTransition(
+                                  key: UniqueKey(),
+                                  sizeFactor: animation,
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 40,
+                                      ),
+                                      child: BagShoesComponent(
+                                        shoe: currentShoe,
+                                        count: count,
+                                        onRemove: () => _onRemoveShoe(
+                                          index,
+                                          context,
+                                          currentShoe,
+                                          count,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               );

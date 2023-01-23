@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:kylashoes/common/widgets/image_shadow.dart';
 import 'package:kylashoes/screens/bag/widgets/bag_shoes_quantity.dart';
@@ -7,14 +9,17 @@ import 'package:kylashoes/bloc/bag_bloc.dart';
 import 'package:kylashoes/view_models/shoe_view_model.dart';
 
 class BagShoesComponent extends StatefulWidget {
+  final ShoeViewModel shoe;
+  final int count;
+  final VoidCallback onRemove;
+
   const BagShoesComponent({
     super.key,
     required this.shoe,
     required this.count,
+    required,
+    required this.onRemove,
   });
-
-  final ShoeViewModel shoe;
-  final int count;
 
   @override
   State<BagShoesComponent> createState() => _BagShoesComponentState();
@@ -60,13 +65,6 @@ class _BagShoesComponentState extends State<BagShoesComponent>
   }
 
   @override
-  void didUpdateWidget(covariant BagShoesComponent oldWidget) {
-    _localComponentCount = widget.count;
-
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width - 40,
@@ -84,15 +82,15 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                   height: _animation.value,
                   width: _animation.value,
                   decoration: BoxDecoration(
-                    color: Colors.grey[400],
+                    color: const Color.fromRGBO(220, 225, 234, 1),
                     borderRadius: BorderRadius.circular(25),
                   ),
                 ),
                 Positioned(
                   bottom: 0,
-                  left: -14,
+                  left: 4,
                   child: Transform.rotate(
-                    angle: -0.3,
+                    angle: -0.1,
                     child: AnimatedOpacity(
                       opacity:
                           _animationStatus == AnimationStatus.forward ? 1 : 0,
@@ -120,7 +118,7 @@ class _BagShoesComponentState extends State<BagShoesComponent>
                 ),
               ],
             ),
-            const SizedBox(width: 50),
+            const SizedBox(width: 70),
             AnimatedOpacity(
               duration: const Duration(milliseconds: 300),
               opacity: _animation.value / 100,
@@ -178,18 +176,18 @@ class _BagShoesComponentState extends State<BagShoesComponent>
 
   Future<void> _onMinusPressed() async {
     if (widget.count == 1) {
-      _animationController.reverse();
+      // _animationController.reverse();
 
-      await Future.delayed(
-        const Duration(seconds: 1),
-      );
+      // await Future.delayed(
+      //   const Duration(seconds: 1),
+      // );
+      widget.onRemove();
     }
-
     _bloc.add(
-          DeleteShoesItem(
-            shoeViewModel: widget.shoe,
-          ),
-        );
+      DeleteShoesItem(
+        shoeViewModel: widget.shoe,
+      ),
+    );
   }
 
   @override
