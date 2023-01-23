@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kylashoes/common/widgets/favorite_button.dart';
 import 'package:kylashoes/common/widgets/image_shadow.dart';
+import 'package:kylashoes/router/app_router.dart';
 import 'package:kylashoes/screens/home/widgets/shoe_card_main_info.dart';
-import 'package:kylashoes/screens/item_info/item_info_screen.dart';
 import 'package:kylashoes/view_models/shoe_view_model.dart';
+import 'package:auto_route/auto_route.dart';
 
 class ShoeCard extends StatefulWidget {
   final ShoeViewModel shoeViewModel;
@@ -60,13 +61,11 @@ class _ShoeCardState extends State<ShoeCard> {
 
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => ItemInfoScreen(
-              shoeViewModel: widget.shoeViewModel,
-              imageHeroTag: imageHeroTag,
-              backgroundHeroTag: backgroundHeroTag,
-            ),
+        context.router.push(
+          ItemInfoRoute(
+            shoeViewModel: widget.shoeViewModel,
+            imageHeroTag: imageHeroTag,
+            backgroundHeroTag: backgroundHeroTag,
           ),
         );
       },
