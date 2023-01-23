@@ -9,7 +9,7 @@ import 'package:kylashoes/screens/item_info/widgets/shoe_size_list_view.dart';
 import 'package:kylashoes/screens/item_info/widgets/item_container.dart';
 import 'package:kylashoes/screens/item_info/widgets/item_info_screen_app_bar.dart';
 import 'package:kylashoes/screens/item_info/widgets/item_photo_horizontal_list.dart';
-import 'package:kylashoes/screens/item_info/widgets/show_add_component_snack_bar.dart';
+import 'package:kylashoes/screens/item_info/widgets/component_add_snack_bar.dart';
 import 'package:kylashoes/view_models/shoe_view_model.dart';
 
 class ItemInfoScreen extends StatefulWidget {
