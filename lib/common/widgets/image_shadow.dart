@@ -25,7 +25,10 @@ class ImageShadow extends StatelessWidget {
           offset: offset,
           child: ImageFiltered(
             imageFilter: ImageFilter.blur(
-                sigmaY: sigma, sigmaX: sigma, tileMode: TileMode.decal),
+              sigmaY: sigma,
+              sigmaX: sigma,
+              tileMode: TileMode.decal,
+            ),
             child: Container(
               decoration: BoxDecoration(
                 border: Border.all(
@@ -36,7 +39,10 @@ class ImageShadow extends StatelessWidget {
               child: Opacity(
                 opacity: opacity,
                 child: ColorFiltered(
-                  colorFilter: ColorFilter.mode(color, BlendMode.srcATop),
+                  colorFilter: ColorFilter.mode(
+                    color,
+                    BlendMode.srcATop,
+                  ),
                   child: child,
                 ),
               ),

@@ -30,8 +30,8 @@ class _BagShoesQuantityState extends State<BagShoesQuantity>
     );
 
     _animation = Tween<Offset>(
-      begin: const Offset(0, -1),
-      end: const Offset(0, 0),
+      begin: const Offset(0, 0),
+      end: const Offset(0, 1),
     ).animate(_animationController);
 
     super.initState();
@@ -68,8 +68,6 @@ class _BagShoesQuantityState extends State<BagShoesQuantity>
         CustomButton(
           onTap: () {
             widget.onPlusPressed();
-
-            _animationController.fling();
           },
           color: Colors.grey[300],
           padding: const EdgeInsets.symmetric(
