@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kylashoes/common/widgets/custom_button.dart';
 import 'package:kylashoes/common/widgets/favorite_button.dart';
+import 'package:kylashoes/screens/item_info/widgets/component_add_snack_bar.dart';
 
 class ItemInfoScreenAppBar extends StatelessWidget {
   final Color backgroundColor;
@@ -30,6 +31,8 @@ class ItemInfoScreenAppBar extends StatelessWidget {
               CustomButton(
                 onTap: () {
                   Navigator.of(context).pop();
+
+                  ComponentAddSnackBar.hide(context);
                 },
                 child: const Icon(
                   Icons.keyboard_backspace_rounded,
